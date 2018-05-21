@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "773807984952",
+    "firebase_url": "https://studentteachercollaborationv2.firebaseio.com",
+    "project_id": "studentteachercollaborationv2",
+    "storage_bucket": "studentteachercollaborationv2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773807984952:android:ce8ffb298c1346c2",
+        "android_client_info": {
+          "package_name": "moonc.example.com.studentteachercollaboration_v2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773807984952-tkg19eqip5g15t88this6h9cokm3tbv2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "moonc.example.com.studentteachercollaboration_v2",
+            "certificate_hash": "a5e959a561a8b1228bd478931080652eb7e5e8b6"
+          }
+        },
+        {
+          "client_id": "773807984952-jlapnlisl75021t4ulqeuhecldn3gngr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCagjCZh-z2K3Ci8AMaRzDzgGjMtg1gOng"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773807984952-jlapnlisl75021t4ulqeuhecldn3gngr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
