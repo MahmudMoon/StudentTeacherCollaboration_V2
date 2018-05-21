@@ -140,13 +140,6 @@ public class LoginActivity extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-
-
-        // these lines will be deleted ....
-
-        Intent intent = new Intent(LoginActivity.this,Admin.class);
-        startActivity(intent);
-
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
