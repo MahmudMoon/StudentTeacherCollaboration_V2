@@ -3,6 +3,7 @@ package moonc.example.com.studentteachercollaboration_v2;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -24,6 +25,7 @@ import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -73,12 +75,17 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private FirebaseAuth firebaseAuth;
+    private TextView register,lost_pass;
     Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         spinner = (Spinner)findViewById(R.id.spn_options);
 
@@ -95,6 +102,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         mProgressView = findViewById(R.id.login_progress);
+
+        lost_pass = (TextView)findViewById(R.id.tv_lostPass);
+        register = (TextView)findViewById(R.id.tv_register);
+
+
+        lost_pass.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,Working.class);
+                startActivity(intent);
+            }
+        });
+
+
+        register.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,Working.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -196,6 +224,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             });
+        }else{
+            Intent intent = new Intent(LoginActivity.this,Working.class);
+            startActivity(intent);
         }
     }
 
