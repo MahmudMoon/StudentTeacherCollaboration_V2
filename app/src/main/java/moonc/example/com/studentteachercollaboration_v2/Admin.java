@@ -52,7 +52,7 @@ public class Admin extends AppCompatActivity {
                 for(DataSnapshot data:dataSnapshot.getChildren()){
                     Students_detail value = data.getValue(Students_detail.class);
                     employees_detail.add(value);
-                    Toast.makeText(getApplicationContext(),Integer.toString(employees_detail.size()),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),Integer.toString(employees_detail.size()),Toast.LENGTH_SHORT).show();
                 }
 
                 progressBar.setVisibility(View.INVISIBLE);
