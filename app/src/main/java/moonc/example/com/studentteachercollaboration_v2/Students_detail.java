@@ -1,53 +1,55 @@
 package moonc.example.com.studentteachercollaboration_v2;
 
 public class Students_detail {
-    String Email;
-    String Name;
-    String Phone;
-    String Key;
+   private String Key;
+   private String Email_id_number;
+
+
+   private String Name;
+   private String Phone_number;
 
 
     public Students_detail() {
-
     }
 
-    public Students_detail(String Key, String name, String email, String phone) {
-        this.Key = Key;
-        this.Email = email;
-        this.Name = name;
-        this.Phone = phone;
+    public Students_detail(String key_, String email_, String name_, String phone_number_) {
+        this.Key = key_;
+        this.Email_id_number = email_;
+        this.Name = name_;
+        this.Phone_number = phone_number_;
     }
-
 
     public String getKey() {
         return Key;
     }
 
-    public void setKey(String key) {
-        Key = key;
+    public void setKey(String key_) {
+        Key = key_;
     }
 
-    public String getEmail() {
-        return Email;
+
+    public String getEmail_id_number() {
+        return Email_id_number;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setEmail_id_number(String email_id_number) {
+        Email_id_number = email_id_number;
     }
+
 
     public String getName() {
         return Name;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setName(String name_) {
+        Name = name_;
     }
 
-    public String getPhone() {
-        return Phone;
+    public String getPhone_number() {
+        return Phone_number;
     }
 
-    public void setPhone(String phone) {
-        Phone = phone;
+    public void setPhone_number(String phone_number_) {
+        Phone_number = phone_number_;
     }
 }

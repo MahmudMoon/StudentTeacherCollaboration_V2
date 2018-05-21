@@ -22,7 +22,7 @@ public class Adapter extends BaseAdapter {
     Context mContext;
     LayoutInflater layoutInflater;
     ArrayList<Students_detail> mArrayList;
-    TextView name,email,phone_num;
+    TextView name_,email_id,phone_num_;
 
 
     public Adapter(Context mContext, ArrayList<Students_detail> mArrayList) {
@@ -50,13 +50,13 @@ public class Adapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         view = layoutInflater.inflate(R.layout.adapter,null);
-        name = (TextView)view.findViewById(R.id.tv_name);
-        email = (TextView)view.findViewById(R.id.tv_email);
-        phone_num = (TextView)view.findViewById(R.id.tv_phone);
+        name_ = (TextView)view.findViewById(R.id.tv_name);
+        email_id = (TextView)view.findViewById(R.id.tv_email);
+        phone_num_ = (TextView)view.findViewById(R.id.tv_phone);
 
-        name.setText(mArrayList.get(position).getName());
-        email.setText(mArrayList.get(position).getEmail());
-        phone_num.setText(mArrayList.get(position).getPhone());
+        name_.setText(mArrayList.get(position).getName());
+        email_id.setText(mArrayList.get(position).getEmail_id_number());
+        phone_num_.setText(mArrayList.get(position).getPhone_number());
 
         return view;
     }

@@ -26,7 +26,7 @@ public class Add extends AppCompatActivity {
         phone_ = (EditText)findViewById(R.id.editText3);
         button = (Button)findViewById(R.id.button);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Student_detail");
+        databaseReference = firebaseDatabase.getReference("Student_details");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +35,7 @@ public class Add extends AppCompatActivity {
                String Name = name_.getText().toString();
                String Email = email_.getText().toString();
                String Phone = phone_.getText().toString();
-               Students_detail students_detail = new Students_detail(Key,Name,Email,Phone);
+               Students_detail students_detail = new Students_detail(Key,Email,Name,Phone);
 
                databaseReference.child(Key).setValue(students_detail);
 

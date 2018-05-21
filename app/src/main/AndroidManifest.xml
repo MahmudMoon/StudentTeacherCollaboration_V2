@@ -28,7 +28,7 @@
             android:label="@string/title_activity_admin"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Add" />
-        <activity android:name=".Update"></activity>
+        <activity android:name=".Update" />
     </application>
 
 </manifest>

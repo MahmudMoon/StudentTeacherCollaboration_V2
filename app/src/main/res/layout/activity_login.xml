@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.4"
-        android:background="@android:color/holo_orange_dark">
+       >
 
         <ImageView
             android:layout_width="match_parent"
@@ -23,7 +23,8 @@
             android:layout_margin="4dp"
             android:background="#fdfdfd"
             android:gravity="center"
-            android:src="@drawable/comm" />
+            android:src="@drawable/comm"
+            android:layout_marginBottom="16dp"/>
     </LinearLayout>
 
     <!-- Login progress -->
@@ -55,7 +56,8 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:textColor="@color/colorPrimaryDark"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:layout_marginTop="4dp"/>
 
         </android.support.design.widget.TextInputLayout>
 
