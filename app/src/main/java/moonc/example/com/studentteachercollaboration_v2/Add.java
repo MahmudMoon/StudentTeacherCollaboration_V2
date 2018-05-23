@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -13,7 +14,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Add extends AppCompatActivity {
 
-    EditText name_,email_,phone_;
+    EditText name_,email_,phone_,id_,password_;
+    Spinner role;
     Button button;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -25,8 +27,12 @@ public class Add extends AppCompatActivity {
         email_ =(EditText)findViewById(R.id.editText2);
         phone_ = (EditText)findViewById(R.id.editText3);
         button = (Button)findViewById(R.id.button);
+        id_ =(EditText)findViewById(R.id.et_id);
+        password_ = (EditText)findViewById(R.id.et_password);
+        role = (Spinner)findViewById(R.id.spn_role);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Student_details");
+        databaseReference = firebaseDatabase.getReference("User_details");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +41,11 @@ public class Add extends AppCompatActivity {
                String Name = name_.getText().toString();
                String Email = email_.getText().toString();
                String Phone = phone_.getText().toString();
-               Students_detail students_detail = new Students_detail(Key,Email,Name,Phone);
+               String Id = id_.getText().toString();
+               String Password = password_.getText().toString();
+                String Role = (String) role.getSelectedItem();
+
+               Students_detail students_detail = new Students_detail(Key,Email,Name,Phone,Id,Password,Role);
 
                databaseReference.child(Key).setValue(students_detail);
 
@@ -44,6 +54,8 @@ public class Add extends AppCompatActivity {
                 name_.setText("");
                 email_.setText("");
                 phone_.setText("");
+                id_.setText("");
+                password_.setText("");
             }
         });
     }

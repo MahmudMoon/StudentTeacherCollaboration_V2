@@ -131,7 +131,7 @@ public class Admin extends AppCompatActivity {
 
     private void init_variables() {
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Student_details");
+        databaseReference = firebaseDatabase.getReference("User_details");
         employees_detail = new ArrayList<>();
 
     }

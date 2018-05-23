@@ -39,6 +39,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -217,17 +222,58 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this,Admin.class);
                         startActivity(intent);
 
-                      //  Toast.makeText(getApplicationContext(), "Successfully logged in", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Successfully logged in", Toast.LENGTH_SHORT).show();
                     }else
                     {
                         Toast.makeText(getApplicationContext(),"Failed to Login",Toast.LENGTH_SHORT).show();
                     }
                 }
             });
+        }else if(selectedItem.equals("Student")){
+
+                LoginAsRole(email,password,selectedItem);
         }else{
-            Intent intent = new Intent(LoginActivity.this,Working.class);
-            startActivity(intent);
+                LoginAsRole(email,password,selectedItem);
         }
+    }
+
+
+
+    private void LoginAsRole(final String email, final String password,final String role) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User_details");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data:dataSnapshot.getChildren()){
+                    Students_detail detail = data.getValue(Students_detail.class);
+                    String Email = detail.getEmail_id_number();
+                    String Password = detail.getPassword();
+                    String Role  = detail.getRole();
+
+                    if(Email.equals(email) && Password.equals(password) && Role.equals(role)){
+                        if(Role.equals("Student")) {
+                            Intent intent = new Intent(LoginActivity.this, Student_activity.class);
+                            startActivity(intent);
+                            break;
+
+                        }else
+                        {
+                            Intent intent = new Intent(LoginActivity.this, Teacher_activity.class);
+                            startActivity(intent);
+                            break;
+                        }
+                    }
+                }
+                    //Toast.makeText(getApplicationContext(),"Failed to login as student",Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 }
