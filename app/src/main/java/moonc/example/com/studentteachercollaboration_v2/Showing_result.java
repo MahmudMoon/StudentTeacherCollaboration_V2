@@ -1,22 +1,16 @@
 package moonc.example.com.studentteachercollaboration_v2;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,40 +19,41 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Admin extends AppCompatActivity {
+public class Showing_result extends AppCompatActivity {
 
-    Intent intent;
-    ArrayList<Students_detail> employees_detail;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ListView listView;
-    FloatingActionButton btn_add,routine;
-    ProgressBar progressBar;
-
+    String Session_,Day_;
+    AdapterForRoutine adapterForRoutine;
+    ArrayList<Object_Created_for_class> mArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        setContentView(R.layout.activity_showing_result);
+        Intent intent = getIntent();
+        Session_ = intent.getStringExtra("session");
+        Day_ = intent.getStringExtra("day");
 
-        init_views();
+        init_view();
         init_variables();
         init_functions();
-
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                employees_detail.clear();
+                mArrayList.clear();
                 for(DataSnapshot data:dataSnapshot.getChildren()){
-                    Students_detail value = data.getValue(Students_detail.class);
-                    employees_detail.add(value);
-                    //Toast.makeText(getApplicationContext(),Integer.toString(employees_detail.size()),Toast.LENGTH_SHORT).show();
+                    Object_Created_for_class object_created_for_class = data.getValue(Object_Created_for_class.class);
+                    mArrayList.add(object_created_for_class);
                 }
 
-                progressBar.setVisibility(View.INVISIBLE);
-                Adapter adapter = new Adapter(getApplicationContext(),employees_detail);
-                listView.setAdapter(adapter);
+                adapterForRoutine  = new AdapterForRoutine(getApplicationContext(),mArrayList);
+                listView.setAdapter(adapterForRoutine);
+              //  adapterForRoutine.notifyDataSetChanged();
 
+
+                Toast.makeText(getApplicationContext(),Integer.toString(mArrayList.size()),Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -68,16 +63,6 @@ public class Admin extends AppCompatActivity {
         });
 
 
-
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              //  alertDialog.show();
-                Intent intent = new Intent(Admin.this,Add.class);
-                startActivity(intent);
-            }
-        });
-
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -86,16 +71,9 @@ public class Admin extends AppCompatActivity {
             }
         });
 
-        routine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Admin.this,Routine.class);
-                startActivity(intent);
-            }
-        });
-
-
     }
+
+
 
     private void updateOrDelete(final int position) {
         ImageButton delete,update;
@@ -112,9 +90,12 @@ public class Admin extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Key = employees_detail.get(position).getKey();
+                String Key = mArrayList.get(position).getKey();
                 databaseReference.child(Key).removeValue();
                 alertDialog.cancel();
+
+
+                //init_functions();
             }
         });
 
@@ -122,43 +103,30 @@ public class Admin extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Key = employees_detail.get(position).getKey();
-               Intent intent = new Intent(Admin.this,Update.class);
-               intent.putExtra("Key",Key);
-               startActivity(intent);
+                String Key = mArrayList.get(position).getKey();
+                Intent intent = new Intent(Showing_result.this,Routine_Add.class);
+                intent.putExtra("session",Session_);
+                intent.putExtra("day",Day_);
+                intent.putExtra("period",Key);
+                startActivity(intent);
             }
         });
     }
 
-
-
-    private void init_functions() {
-
-          progressBar.setVisibility(View.VISIBLE);
-
+    private void init_view() {
+        listView = (ListView)findViewById(R.id.lv_);
     }
-
 
     private void init_variables() {
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("User_details");
-        employees_detail = new ArrayList<>();
-
+        databaseReference = firebaseDatabase.getReference("Routine").child(Session_).child(Day_);
+        mArrayList = new ArrayList<>();
     }
 
-    private void init_views() {
-        listView = (ListView)findViewById(R.id.list_view);
-        btn_add = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
-        routine = (FloatingActionButton)findViewById(R.id.routine_);
-
-
+    private void init_functions() {
     }
 
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finishAffinity();
-    }
+
+
 }

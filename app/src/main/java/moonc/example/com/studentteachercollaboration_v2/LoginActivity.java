@@ -174,8 +174,15 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void attemptLogin() {
 
-//        Intent intent = new Intent(LoginActivity.this,Admin.class);
-//        startActivity(intent);
+        boolean b = true;
+        if(b) {
+
+            Intent intent = new Intent(LoginActivity.this, Admin.class);
+            startActivity(intent);
+            return;
+        }
+
+        Toast.makeText(getApplicationContext(),"Stop",Toast.LENGTH_SHORT).show();
 
         // Reset errors.
         mEmailView.setError(null);
