@@ -44,11 +44,11 @@
         android:id="@+id/button"
         android:layout_width="123dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="91dp"
+        android:layout_marginBottom="64dp"
         android:text="add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.789"
+        app:layout_constraintHorizontal_bias="0.854"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -81,4 +81,16 @@
         app:layout_constraintStart_toStartOf="@+id/et_id"
         app:layout_constraintTop_toBottomOf="@+id/et_id"
         android:entries="@array/role"/>
+
+    <Spinner
+        android:id="@+id/spinner5"
+        android:layout_width="284dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/spn_role"
+        app:layout_constraintHorizontal_bias="0.727"
+        app:layout_constraintStart_toStartOf="@+id/spn_role"
+        app:layout_constraintTop_toBottomOf="@+id/spn_role"
+        android:entries="@array/session"/>
 </android.support.constraint.ConstraintLayout>

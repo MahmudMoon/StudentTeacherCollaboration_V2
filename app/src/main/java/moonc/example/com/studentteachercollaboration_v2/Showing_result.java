@@ -25,6 +25,7 @@ public class Showing_result extends AppCompatActivity {
     DatabaseReference databaseReference;
     ListView listView;
     String Session_,Day_;
+    int From;
     AdapterForRoutine adapterForRoutine;
     ArrayList<Object_Created_for_class> mArrayList;
     @Override
@@ -32,8 +33,10 @@ public class Showing_result extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showing_result);
         Intent intent = getIntent();
+
         Session_ = intent.getStringExtra("session");
         Day_ = intent.getStringExtra("day");
+        From = intent.getIntExtra("from",0);
 
         init_view();
         init_variables();
@@ -62,14 +65,15 @@ public class Showing_result extends AppCompatActivity {
             }
         });
 
-
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                updateOrDelete(position);
-                return false;
-            }
-        });
+        if(From==0) {
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    updateOrDelete(position);
+                    return false;
+                }
+            });
+        }
 
     }
 
@@ -93,7 +97,6 @@ public class Showing_result extends AppCompatActivity {
                 String Key = mArrayList.get(position).getKey();
                 databaseReference.child(Key).removeValue();
                 alertDialog.cancel();
-
 
                 //init_functions();
             }

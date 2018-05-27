@@ -29,7 +29,7 @@ public class Routine_Add extends AppCompatActivity {
     Button btn_add_clicked;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    String session,day_,period_;
+    String session_,day_,period_;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class Routine_Add extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        session = intent.getStringExtra("session");
+        session_ = intent.getStringExtra("session");
         day_ = intent.getStringExtra("day");
         period_ = intent.getStringExtra("period");
 
@@ -46,38 +46,44 @@ public class Routine_Add extends AppCompatActivity {
         init_variables();
         init_functions();
 
-        if(!TextUtils.isEmpty(session) && !TextUtils.isEmpty(day_) && !TextUtils.isEmpty(period_)){
+        if(!TextUtils.isEmpty(session_) && !TextUtils.isEmpty(day_) && !TextUtils.isEmpty(period_)){
              btn_add_clicked.setText("Update");
-             final DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Routine").child(session).child(day_).child(period_);
+             final DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Routine").child(session_).child(day_).child(period_);
              databaseReference1.addValueEventListener(new ValueEventListener() {
                  @Override
                  public void onDataChange(DataSnapshot dataSnapshot) {
-                     Object_Created_for_class object_created_for_class = dataSnapshot.getValue(Object_Created_for_class.class);
-                     et_subject.setText(object_created_for_class.getSubject());
-                     et_course.setText(object_created_for_class.getCourse_code());
-                     et_start.setText(object_created_for_class.getStart());
-                     et_end.setText(object_created_for_class.getEnd());
-                     et_room.setText(object_created_for_class.getRoom());
-                     String ses = session;
 
-                     String[] positions = getResources().getStringArray(R.array.session);
-                     ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(positions));
+                     if(!TextUtils.isEmpty(session_) && !TextUtils.isEmpty(day_) && !TextUtils.isEmpty(period_)) {
 
-                     int position = arrayList.indexOf(ses);
-                     spn_session.setSelection(position);
+                         Object_Created_for_class object_created_for_class = dataSnapshot.getValue(Object_Created_for_class.class);
+                         Toast.makeText(getApplicationContext(), "on Routine", Toast.LENGTH_SHORT).show();
+                         et_subject.setText(object_created_for_class.getSubject());
+                         et_course.setText(object_created_for_class.getCourse_code());
+                         et_start.setText(object_created_for_class.getStart());
+                         et_end.setText(object_created_for_class.getEnd());
+                         et_room.setText(object_created_for_class.getRoom());
+                         String ses = session_;
+                         session_ = null;
 
-                     String[] positions1 = getResources().getStringArray(R.array.day);
-                     ArrayList<String> arrayList1 = new ArrayList<>(Arrays.asList(positions1));
+                         String[] positions = getResources().getStringArray(R.array.session);
+                         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(positions));
 
-                     int position1 = arrayList1.indexOf(day_);
-                     spn_day.setSelection(position1);
+                         int position = arrayList.indexOf(ses);
+                         spn_session.setSelection(position);
+
+                         String[] positions1 = getResources().getStringArray(R.array.day);
+                         ArrayList<String> arrayList1 = new ArrayList<>(Arrays.asList(positions1));
+
+                         int position1 = arrayList1.indexOf(day_);
+                         spn_day.setSelection(position1);
 
 
-                     String[] positions2 = getResources().getStringArray(R.array.period);
-                     ArrayList<String> arrayList2 = new ArrayList<>(Arrays.asList(positions2));
+                         String[] positions2 = getResources().getStringArray(R.array.period);
+                         ArrayList<String> arrayList2 = new ArrayList<>(Arrays.asList(positions2));
 
-                     int position2 = arrayList2.indexOf(period_);
-                     spn_period.setSelection(position2);
+                         int position2 = arrayList2.indexOf(period_);
+                         spn_period.setSelection(position2);
+                     }
 
 
                  }
@@ -129,9 +135,26 @@ public class Routine_Add extends AppCompatActivity {
                 if( !TextUtils.isEmpty(subject) && !TextUtils.isEmpty(course_code)  && !TextUtils.isEmpty(start) && !TextUtils.isEmpty(end)  && !TextUtils.isEmpty(room)){
                     Object_Created_for_class object_created_for_class = new Object_Created_for_class(subject,course_code,start,end,room,period);
                     databaseReference.child(session).child(day).child(period).setValue(object_created_for_class);
+                    Toast.makeText(getApplicationContext(),"New Routine Added",Toast.LENGTH_SHORT).show();
+                    et_subject.setText("");
+                    et_course.setText("");
+                    et_start.setText("");
+                    et_end.setText("");
+                    et_room.setText("");
+
+
                 }else
                 {
                     Toast.makeText(getApplicationContext(),"can't leave the fields blank",Toast.LENGTH_SHORT).show();
+                }
+
+
+                if(btn_add_clicked.getText().toString().equals("Update")){
+                    Intent intent = new Intent(Routine_Add.this,Showing_result.class);
+                    intent.putExtra("session",session);
+                    intent.putExtra("day",day);
+                   // intent.putExtra("period",period);
+                    startActivity(intent);
                 }
 
             }

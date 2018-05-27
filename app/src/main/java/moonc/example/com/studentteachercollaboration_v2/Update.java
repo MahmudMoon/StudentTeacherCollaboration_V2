@@ -26,6 +26,7 @@ public class Update extends AppCompatActivity {
     Button update;
     String Key;
     Spinner role_;
+    Spinner session_;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class Update extends AppCompatActivity {
         id_ =(EditText)findViewById(R.id.editText7);
         password_ = (EditText)findViewById(R.id.editText8);
         role_ = (Spinner)findViewById(R.id.spinner);
+        session_ = (Spinner)findViewById(R.id.spinner_ses);
 
         Intent intent = getIntent();
         Key = intent.getStringExtra("Key");
@@ -53,6 +55,7 @@ public class Update extends AppCompatActivity {
                 String id = detail.getID();
                 String password = detail.getPassword();
                 String role = detail.getRole();
+                String Session = detail.getSession();
 
                 name_.setText(name);
                 email_.setText(email);
@@ -64,6 +67,14 @@ public class Update extends AppCompatActivity {
 
                 int position = arrayList.indexOf(role);
                 role_.setSelection(position);
+
+                if(!Session.equals("Teacher")) {
+                    String[] positions_1 = getResources().getStringArray(R.array.session);
+                    ArrayList<String> arrayList_1 = new ArrayList<>(Arrays.asList(positions_1));
+
+                    int position1 = arrayList_1.indexOf(Session);
+                    session_.setSelection(position1);
+                }
 
             }
 
@@ -98,8 +109,13 @@ public class Update extends AppCompatActivity {
                 String Id = id_.getText().toString();
                 String Password = password_.getText().toString();
                 String Role = (String) role_.getSelectedItem();
+                String Session = "";
 
-                Students_detail students_detail = new Students_detail(Key,email,name,phone,Id,Password,Role);
+                if(!Session.equals("Teacher")) {
+                    Session = (String) session_.getSelectedItem();
+                }
+
+                Students_detail students_detail = new Students_detail(Key,email,name,phone,Id,Password,Role,Session);
                 databaseReference.setValue(students_detail);
                 Toast.makeText(getApplicationContext(),"Updated",Toast.LENGTH_SHORT).show();
 

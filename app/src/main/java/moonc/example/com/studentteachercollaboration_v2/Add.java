@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Add extends AppCompatActivity {
 
     EditText name_,email_,phone_,id_,password_;
-    Spinner role;
+    Spinner role,Session;
     Button button;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -30,6 +30,7 @@ public class Add extends AppCompatActivity {
         id_ =(EditText)findViewById(R.id.et_id);
         password_ = (EditText)findViewById(R.id.et_password);
         role = (Spinner)findViewById(R.id.spn_role);
+        Session = (Spinner)findViewById(R.id.spinner5);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("User_details");
@@ -44,8 +45,12 @@ public class Add extends AppCompatActivity {
                String Id = id_.getText().toString();
                String Password = password_.getText().toString();
                 String Role = (String) role.getSelectedItem();
+                String Sess_ = "";
+                if(!Role.equals("Teacher")){
+                    Sess_ = (String)Session.getSelectedItem();
+                }
 
-               Students_detail students_detail = new Students_detail(Key,Email,Name,Phone,Id,Password,Role);
+               Students_detail students_detail = new Students_detail(Key,Email,Name,Phone,Id,Password,Role,Sess_);
 
                databaseReference.child(Key).setValue(students_detail);
 

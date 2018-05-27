@@ -174,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void attemptLogin() {
 
-        boolean b = true;
+        boolean b = false;
         if(b) {
 
             Intent intent = new Intent(LoginActivity.this, Admin.class);
@@ -238,7 +238,9 @@ public class LoginActivity extends AppCompatActivity {
             });
         }else if(selectedItem.equals("Student")){
 
-                LoginAsRole(email,password,selectedItem);
+            Toast.makeText(getApplicationContext(),"On Student",Toast.LENGTH_SHORT).show();
+
+            LoginAsRole(email,password,selectedItem);
         }else{
                 LoginAsRole(email,password,selectedItem);
         }
@@ -259,7 +261,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     if(Email.equals(email) && Password.equals(password) && Role.equals(role)){
                         if(Role.equals("Student")) {
+                            String Session = detail.getSession();
                             Intent intent = new Intent(LoginActivity.this, Student_activity.class);
+                            intent.putExtra("session",Session);
                             startActivity(intent);
                             break;
 

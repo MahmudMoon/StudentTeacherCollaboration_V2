@@ -54,6 +54,12 @@
         android:layout_height="40dp"
         android:entries="@array/role"></Spinner>
 
+    <Spinner
+        android:id="@+id/spinner_ses"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:entries="@array/session"></Spinner>
+
     <Button
         android:id="@+id/button2"
         android:layout_width="110dp"

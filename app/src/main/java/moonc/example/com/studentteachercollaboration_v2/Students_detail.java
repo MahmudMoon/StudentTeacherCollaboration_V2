@@ -8,11 +8,12 @@ public class Students_detail {
    private String Name;
    private String Phone_number;
    private String ID,Password,Role;
+   private String Session;
 
     public Students_detail() {
     }
 
-    public Students_detail(String key_, String email_, String name_, String phone_number_,String id,String password,String role) {
+    public Students_detail(String key_, String email_, String name_, String phone_number_,String id,String password,String role,String session) {
         this.Key = key_;
         this.Email_id_number = email_;
         this.Name = name_;
@@ -20,6 +21,16 @@ public class Students_detail {
         this.ID = id;
         this.Password = password;
         this.Role = role;
+        this.Session = session;
+    }
+
+
+    public String getSession() {
+        return Session;
+    }
+
+    public void setSession(String session) {
+        Session = session;
     }
 
     public String getID() {
