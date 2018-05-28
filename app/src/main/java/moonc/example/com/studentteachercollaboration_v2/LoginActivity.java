@@ -174,6 +174,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void attemptLogin() {
 
+        // to avoid firebase authentication,,,,
         boolean b = true;
         if(b) {
 
