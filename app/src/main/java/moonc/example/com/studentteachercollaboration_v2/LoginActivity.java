@@ -174,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void attemptLogin() {
 
-        boolean b = false;
+        boolean b = true;
         if(b) {
 
             Intent intent = new Intent(LoginActivity.this, Admin.class);

@@ -22,7 +22,7 @@ import java.util.Arrays;
 
 public class Routine_Add extends AppCompatActivity {
 
-    Spinner spn_session,spn_day,spn_period;
+    Spinner spn_session,spn_day;
     EditText et_subject,et_course;
     EditText et_start,et_end;
     EditText et_room;
@@ -78,11 +78,11 @@ public class Routine_Add extends AppCompatActivity {
                          spn_day.setSelection(position1);
 
 
-                         String[] positions2 = getResources().getStringArray(R.array.period);
-                         ArrayList<String> arrayList2 = new ArrayList<>(Arrays.asList(positions2));
-
-                         int position2 = arrayList2.indexOf(period_);
-                         spn_period.setSelection(position2);
+//                         String[] positions2 = getResources().getStringArray(R.array.period);
+//                         ArrayList<String> arrayList2 = new ArrayList<>(Arrays.asList(positions2));
+//
+//                         int position2 = arrayList2.indexOf(period_);
+//                         spn_period.setSelection(position2);
                      }
 
 
@@ -99,7 +99,7 @@ public class Routine_Add extends AppCompatActivity {
     private void init_views() {
         spn_session = (Spinner)findViewById(R.id.spinner2);
         spn_day = (Spinner)findViewById(R.id.spinner3);
-        spn_period = (Spinner)findViewById(R.id.spinner4);
+        //spn_period = (Spinner)findViewById(R.id.spinner4);
         et_subject = (EditText)findViewById(R.id.editText9);
         et_course = (EditText)findViewById(R.id.editText10);
         et_start = (EditText)findViewById(R.id.editText11);
@@ -123,18 +123,22 @@ public class Routine_Add extends AppCompatActivity {
 
                 String session = (String) spn_session.getSelectedItem();
                 String day = (String) spn_day.getSelectedItem();
-                String period = (String) spn_period.getSelectedItem();
+               // String period = (String) spn_period.getSelectedItem();
 
                 String subject = et_subject.getText().toString();
                 String course_code = et_course.getText().toString();
                 String start = et_start.getText().toString();
                 String end = et_end.getText().toString();
                 String room = et_room.getText().toString();
+                String Key  = period_;
 
 
                 if( !TextUtils.isEmpty(subject) && !TextUtils.isEmpty(course_code)  && !TextUtils.isEmpty(start) && !TextUtils.isEmpty(end)  && !TextUtils.isEmpty(room)){
-                    Object_Created_for_class object_created_for_class = new Object_Created_for_class(subject,course_code,start,end,room,period);
-                    databaseReference.child(session).child(day).child(period).setValue(object_created_for_class);
+                    if( ! btn_add_clicked.getText().equals("Update")) {
+                        Key = databaseReference.child(session).child(day).push().getKey();
+                    }
+                    Object_Created_for_class object_created_for_class = new Object_Created_for_class(subject,course_code,start,end,room,Key);
+                    databaseReference.child(session).child(day).child(Key).setValue(object_created_for_class);
                     Toast.makeText(getApplicationContext(),"New Routine Added",Toast.LENGTH_SHORT).show();
                     et_subject.setText("");
                     et_course.setText("");
