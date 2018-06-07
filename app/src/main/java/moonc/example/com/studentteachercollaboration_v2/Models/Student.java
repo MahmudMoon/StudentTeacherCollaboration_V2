@@ -1,29 +1,26 @@
-package moonc.example.com.studentteachercollaboration_v2;
+package moonc.example.com.studentteachercollaboration_v2.Models;
 
-public class Students_detail {
+public class Student {
    private String Key;
-   private String Email_id_number;
-
-
+   private String EmailIDNumber;
    private String Name;
-   private String Phone_number;
+   private String PhoneNumber;
    private String ID,Password,Role;
    private String Session;
 
-    public Students_detail() {
+    public Student() {
     }
 
-    public Students_detail(String key_, String email_, String name_, String phone_number_,String id,String password,String role,String session) {
+    public Student(String key_, String email_, String name_, String phone_number_, String id, String password, String role, String session) {
         this.Key = key_;
-        this.Email_id_number = email_;
+        this.EmailIDNumber = email_;
         this.Name = name_;
-        this.Phone_number = phone_number_;
+        this.PhoneNumber = phone_number_;
         this.ID = id;
         this.Password = password;
         this.Role = role;
         this.Session = session;
     }
-
 
     public String getSession() {
         return Session;
@@ -57,8 +54,6 @@ public class Students_detail {
         Role = role;
     }
 
-
-
     public String getKey() {
         return Key;
     }
@@ -67,15 +62,13 @@ public class Students_detail {
         Key = key_;
     }
 
-
-    public String getEmail_id_number() {
-        return Email_id_number;
+    public String getEmailIDNumber() {
+        return EmailIDNumber;
     }
 
-    public void setEmail_id_number(String email_id_number) {
-        Email_id_number = email_id_number;
+    public void setEmailIDNumber(String emailIDNumber) {
+        EmailIDNumber = emailIDNumber;
     }
-
 
     public String getName() {
         return Name;
@@ -85,11 +78,11 @@ public class Students_detail {
         Name = name_;
     }
 
-    public String getPhone_number() {
-        return Phone_number;
+    public String getPhoneNumber() {
+        return PhoneNumber;
     }
 
-    public void setPhone_number(String phone_number_) {
-        Phone_number = phone_number_;
+    public void setPhoneNumber(String phone_number_) {
+        PhoneNumber = phone_number_;
     }
 }

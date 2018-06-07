@@ -18,6 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import moonc.example.com.studentteachercollaboration_v2.Models.Student;
+
 public class Update extends AppCompatActivity {
 
 
@@ -48,10 +50,10 @@ public class Update extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Students_detail detail = dataSnapshot.getValue(Students_detail.class);
+                Student detail = dataSnapshot.getValue(Student.class);
                 String name = detail.getName();
-                String email = detail.getEmail_id_number();
-                String phone = detail.getPhone_number();
+                String email = detail.getEmailIDNumber();
+                String phone = detail.getPhoneNumber();
                 String id = detail.getID();
                 String password = detail.getPassword();
                 String role = detail.getRole();
@@ -115,8 +117,8 @@ public class Update extends AppCompatActivity {
                     Session = (String) session_.getSelectedItem();
                 }
 
-                Students_detail students_detail = new Students_detail(Key,email,name,phone,Id,Password,Role,Session);
-                databaseReference.setValue(students_detail);
+                Student student = new Student(Key,email,name,phone,Id,Password,Role,Session);
+                databaseReference.setValue(student);
                 Toast.makeText(getApplicationContext(),"Updated",Toast.LENGTH_SHORT).show();
 
 

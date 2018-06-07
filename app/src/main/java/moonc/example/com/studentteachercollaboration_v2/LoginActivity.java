@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import moonc.example.com.studentteachercollaboration_v2.Models.Student;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final int REQUEST_READ_CONTACTS = 0;
@@ -114,19 +116,16 @@ public class LoginActivity extends AppCompatActivity {
             mEmailView.requestFocus();
             return;
         }
-
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             mEmailView.setError("Not a valid Email");
             mEmailView.requestFocus();
             return;
         }
-
         if (password.isEmpty()) {
             mPasswordView.setError("Password Field Can't be empty");
             mEmailView.requestFocus();
             return;
         }
-
         if (password.length() < 8) {
             mPasswordView.setError("Password can't be less than 8 character");
             mEmailView.requestFocus();
@@ -161,8 +160,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Students_detail detail = data.getValue(Students_detail.class);
-                    String Email = detail.getEmail_id_number();
+                    Student detail = data.getValue(Student.class);
+                    String Email = detail.getEmailIDNumber();
                     String Password = detail.getPassword();
                     String Role = detail.getRole();
 

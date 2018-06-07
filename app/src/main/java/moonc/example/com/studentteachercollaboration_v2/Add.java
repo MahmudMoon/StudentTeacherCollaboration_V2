@@ -1,6 +1,5 @@
 package moonc.example.com.studentteachercollaboration_v2;
 
-import android.media.effect.Effect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +10,8 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 
 public class Add extends AppCompatActivity {
 
@@ -50,9 +51,9 @@ public class Add extends AppCompatActivity {
                     Sess_ = (String)Session.getSelectedItem();
                 }
 
-               Students_detail students_detail = new Students_detail(Key,Email,Name,Phone,Id,Password,Role,Sess_);
+               Student student = new Student(Key,Email,Name,Phone,Id,Password,Role,Sess_);
 
-               databaseReference.child(Key).setValue(students_detail);
+               databaseReference.child(Key).setValue(student);
 
                 Toast.makeText(getApplicationContext(),"New Student Added",Toast.LENGTH_SHORT).show();
 
