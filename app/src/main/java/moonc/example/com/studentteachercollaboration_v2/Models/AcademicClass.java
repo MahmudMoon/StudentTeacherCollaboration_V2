@@ -1,6 +1,6 @@
-package moonc.example.com.studentteachercollaboration_v2;
+package moonc.example.com.studentteachercollaboration_v2.Models;
 
-public class Object_Created_for_class {
+public class AcademicClass {
     private String Subject;
     private String Course_code;
     private String Start;
@@ -8,12 +8,11 @@ public class Object_Created_for_class {
     private String room;
     private String Key;
 
-
-    public Object_Created_for_class() {
+    public AcademicClass() {
 
     }
 
-    public Object_Created_for_class(String subject, String course_code, String start, String end, String room,String key) {
+    public AcademicClass(String subject, String course_code, String start, String end, String room, String key) {
         Subject = subject;
         Course_code = course_code;
         Start = start;

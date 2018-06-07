@@ -19,6 +19,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import moonc.example.com.studentteachercollaboration_v2.Models.AcademicClass;
+
 public class Showing_result extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
@@ -27,7 +29,7 @@ public class Showing_result extends AppCompatActivity {
     String Session_,Day_;
     int From;
     AdapterForRoutine adapterForRoutine;
-    ArrayList<Object_Created_for_class> mArrayList;
+    ArrayList<AcademicClass> mArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +49,8 @@ public class Showing_result extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mArrayList.clear();
                 for(DataSnapshot data:dataSnapshot.getChildren()){
-                    Object_Created_for_class object_created_for_class = data.getValue(Object_Created_for_class.class);
-                    mArrayList.add(object_created_for_class);
+                    AcademicClass academicClass = data.getValue(AcademicClass.class);
+                    mArrayList.add(academicClass);
                 }
 
                 adapterForRoutine  = new AdapterForRoutine(getApplicationContext(),mArrayList);

@@ -2,9 +2,9 @@ package moonc.example.com.studentteachercollaboration_v2.Models;
 
 public class Student {
    private String Key;
-   private String EmailIDNumber;
+   private String Email_id_number;
    private String Name;
-   private String PhoneNumber;
+   private String Phone_number;
    private String ID,Password,Role;
    private String Session;
 
@@ -13,9 +13,9 @@ public class Student {
 
     public Student(String key_, String email_, String name_, String phone_number_, String id, String password, String role, String session) {
         this.Key = key_;
-        this.EmailIDNumber = email_;
+        this.Email_id_number = email_;
         this.Name = name_;
-        this.PhoneNumber = phone_number_;
+        this.Phone_number = phone_number_;
         this.ID = id;
         this.Password = password;
         this.Role = role;
@@ -54,6 +54,7 @@ public class Student {
         Role = role;
     }
 
+
     public String getKey() {
         return Key;
     }
@@ -62,13 +63,15 @@ public class Student {
         Key = key_;
     }
 
-    public String getEmailIDNumber() {
-        return EmailIDNumber;
+
+    public String getEmail_id_number() {
+        return Email_id_number;
     }
 
-    public void setEmailIDNumber(String emailIDNumber) {
-        EmailIDNumber = emailIDNumber;
+    public void setEmail_id_number(String email_id_number) {
+        Email_id_number = email_id_number;
     }
+
 
     public String getName() {
         return Name;
@@ -78,11 +81,11 @@ public class Student {
         Name = name_;
     }
 
-    public String getPhoneNumber() {
-        return PhoneNumber;
+    public String getPhone_number() {
+        return Phone_number;
     }
 
-    public void setPhoneNumber(String phone_number_) {
-        PhoneNumber = phone_number_;
+    public void setPhone_number(String phone_number_) {
+        Phone_number = phone_number_;
     }
 }

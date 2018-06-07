@@ -14,7 +14,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 
 public class Add extends AppCompatActivity {
-
     EditText name_,email_,phone_,id_,password_;
     Spinner role,Session;
     Button button;
@@ -32,7 +31,6 @@ public class Add extends AppCompatActivity {
         password_ = (EditText)findViewById(R.id.et_password);
         role = (Spinner)findViewById(R.id.spn_role);
         Session = (Spinner)findViewById(R.id.spinner5);
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("User_details");
 
@@ -50,13 +48,10 @@ public class Add extends AppCompatActivity {
                 if(!Role.equals("Teacher")){
                     Sess_ = (String)Session.getSelectedItem();
                 }
-
                Student student = new Student(Key,Email,Name,Phone,Id,Password,Role,Sess_);
-
                databaseReference.child(Key).setValue(student);
-
-                Toast.makeText(getApplicationContext(),"New Student Added",Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getApplicationContext(),
+                        "New Student Added",Toast.LENGTH_SHORT).show();
                 name_.setText("");
                 email_.setText("");
                 phone_.setText("");

@@ -17,13 +17,9 @@ public class Day extends AppCompatActivity {
         setContentView(R.layout.activity_day);
         Intent intent = getIntent();
         session = intent.getStringExtra("session");
-
-
         init_view();
         init_variables();
         init_functions();
-
-
     }
 
     private void init_view() {
@@ -33,7 +29,6 @@ public class Day extends AppCompatActivity {
         d4 = (TextView)findViewById(R.id.textView15);
         d5 = (TextView)findViewById(R.id.textView16);
         tv_session_ = (TextView)findViewById(R.id.tv_session);
-
     }
 
     private void init_variables() {

@@ -19,12 +19,9 @@ public class Student_activity extends AppCompatActivity {
         Intent intent = getIntent();
         session = intent.getStringExtra("session");
         Toast.makeText(getApplicationContext(),session,Toast.LENGTH_SHORT).show();
-
-
         init_view();
         init_variables();
         init_functions();
-
     }
 
     private void init_view() {
@@ -34,7 +31,6 @@ public class Student_activity extends AppCompatActivity {
         d4 = (TextView)findViewById(R.id.textView15);
         d5 = (TextView)findViewById(R.id.textView16);
         tv_session_ = (TextView)findViewById(R.id.tv_session);
-
     }
 
 

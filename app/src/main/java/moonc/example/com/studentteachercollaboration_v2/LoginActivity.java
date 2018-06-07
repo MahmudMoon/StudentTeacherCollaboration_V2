@@ -161,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Student detail = data.getValue(Student.class);
-                    String Email = detail.getEmailIDNumber();
+                    String Email = detail.getEmail_id_number();
                     String Password = detail.getPassword();
                     String Role = detail.getRole();
 

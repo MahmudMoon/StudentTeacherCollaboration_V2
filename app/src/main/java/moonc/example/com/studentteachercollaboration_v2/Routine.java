@@ -19,12 +19,8 @@ public class Routine extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routine);
-
         init_view();
-        init_variables();
         init_functions();
-
-
     }
 
     private void init_view() {
@@ -33,10 +29,6 @@ public class Routine extends AppCompatActivity {
         session2 = (TextView)findViewById(R.id.textView3);
         session3 = (TextView)findViewById(R.id.textView9);
         session4 = (TextView)findViewById(R.id.textView10);
-    }
-
-    private void init_variables() {
-
     }
 
     private void init_functions() {

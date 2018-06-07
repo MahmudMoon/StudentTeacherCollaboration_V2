@@ -52,8 +52,8 @@ public class Update extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Student detail = dataSnapshot.getValue(Student.class);
                 String name = detail.getName();
-                String email = detail.getEmailIDNumber();
-                String phone = detail.getPhoneNumber();
+                String email = detail.getEmail_id_number();
+                String phone = detail.getPhone_number();
                 String id = detail.getID();
                 String password = detail.getPassword();
                 String role = detail.getRole();

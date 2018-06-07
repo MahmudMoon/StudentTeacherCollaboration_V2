@@ -1,6 +1,7 @@
 package moonc.example.com.studentteachercollaboration_v2;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import moonc.example.com.studentteachercollaboration_v2.Contstants.Constants;
 import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 
 public class Adapter extends BaseAdapter {
@@ -48,8 +50,11 @@ public class Adapter extends BaseAdapter {
         phone_num_ = (TextView) view.findViewById(R.id.tv_phone);
 
         name_.setText(mArrayList.get(position).getName());
-        email_id.setText(mArrayList.get(position).getEmailIDNumber());
-        phone_num_.setText(mArrayList.get(position).getPhoneNumber());
+        email_id.setText(mArrayList.get(position).getEmail_id_number());
+        phone_num_.setText(mArrayList.get(position).getPhone_number());
+
+        Log.d(Constants.LOGTAG, "email : " + mArrayList.get(position).getEmail_id_number());
+
         return view;
     }
 }

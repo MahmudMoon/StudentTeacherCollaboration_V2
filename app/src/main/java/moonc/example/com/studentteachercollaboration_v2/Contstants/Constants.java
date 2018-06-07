@@ -5,4 +5,5 @@ package moonc.example.com.studentteachercollaboration_v2.Contstants;
  */
 
 public class Constants {
+    public static final String LOGTAG = "logtag";
 }

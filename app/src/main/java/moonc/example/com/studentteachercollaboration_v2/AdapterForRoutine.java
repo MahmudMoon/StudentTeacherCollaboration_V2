@@ -9,14 +9,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class AdapterForRoutine extends BaseAdapter {
+import moonc.example.com.studentteachercollaboration_v2.Models.AcademicClass;
 
+public class AdapterForRoutine extends BaseAdapter {
     Context mContext;
-    ArrayList<Object_Created_for_class> mArrayList;
+    ArrayList<AcademicClass> mArrayList;
     LayoutInflater inflater;
     TextView sub,course,starttime,endtime,room;
 
-    public AdapterForRoutine(Context mContext, ArrayList<Object_Created_for_class> mArrayList) {
+    public AdapterForRoutine(Context mContext, ArrayList<AcademicClass> mArrayList) {
         this.mContext = mContext;
         this.mArrayList = mArrayList;
         inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -47,13 +48,11 @@ public class AdapterForRoutine extends BaseAdapter {
         endtime = (TextView)view.findViewById(R.id.endTime);
         room = (TextView)view.findViewById(R.id.room);
 
-
         sub.setText(mArrayList.get(position).getSubject());
         course.setText(mArrayList.get(position).getCourse_code());
         starttime.setText(mArrayList.get(position).getStart());
         endtime.setText(mArrayList.get(position).getEnd());
         room.setText(mArrayList.get(position).getRoom());
-
         return view;
     }
 }

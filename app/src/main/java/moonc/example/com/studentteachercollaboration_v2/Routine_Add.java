@@ -1,7 +1,6 @@
 package moonc.example.com.studentteachercollaboration_v2;
 
 import android.content.Intent;
-import android.media.effect.Effect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,6 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import moonc.example.com.studentteachercollaboration_v2.Models.AcademicClass;
 
 public class Routine_Add extends AppCompatActivity {
 
@@ -55,13 +56,13 @@ public class Routine_Add extends AppCompatActivity {
 
                      if(!TextUtils.isEmpty(session_) && !TextUtils.isEmpty(day_) && !TextUtils.isEmpty(period_)) {
 
-                         Object_Created_for_class object_created_for_class = dataSnapshot.getValue(Object_Created_for_class.class);
+                         AcademicClass academicClass = dataSnapshot.getValue(AcademicClass.class);
                          Toast.makeText(getApplicationContext(), "on Routine", Toast.LENGTH_SHORT).show();
-                         et_subject.setText(object_created_for_class.getSubject());
-                         et_course.setText(object_created_for_class.getCourse_code());
-                         et_start.setText(object_created_for_class.getStart());
-                         et_end.setText(object_created_for_class.getEnd());
-                         et_room.setText(object_created_for_class.getRoom());
+                         et_subject.setText(academicClass.getSubject());
+                         et_course.setText(academicClass.getCourse_code());
+                         et_start.setText(academicClass.getStart());
+                         et_end.setText(academicClass.getEnd());
+                         et_room.setText(academicClass.getRoom());
                          String ses = session_;
                          session_ = null;
 
@@ -137,8 +138,8 @@ public class Routine_Add extends AppCompatActivity {
                     if( ! btn_add_clicked.getText().equals("Update")) {
                         Key = databaseReference.child(session).child(day).push().getKey();
                     }
-                    Object_Created_for_class object_created_for_class = new Object_Created_for_class(subject,course_code,start,end,room,Key);
-                    databaseReference.child(session).child(day).child(Key).setValue(object_created_for_class);
+                    AcademicClass academicClass = new AcademicClass(subject,course_code,start,end,room,Key);
+                    databaseReference.child(session).child(day).child(Key).setValue(academicClass);
                     Toast.makeText(getApplicationContext(),"New Routine Added",Toast.LENGTH_SHORT).show();
                     et_subject.setText("");
                     et_course.setText("");

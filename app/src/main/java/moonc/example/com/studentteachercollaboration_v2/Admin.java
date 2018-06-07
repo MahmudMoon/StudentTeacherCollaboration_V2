@@ -25,7 +25,6 @@ import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 public class Admin extends AppCompatActivity {
 
     ArrayList<Student> employees_detail = new ArrayList<>();
-    ;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ListView listView;
