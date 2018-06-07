@@ -8,17 +8,18 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import moonc.example.com.studentteachercollaboration_v2.Models.AcademicClass;
 import moonc.example.com.studentteachercollaboration_v2.R;
 
 public class RoutineAdapter extends BaseAdapter {
     Context mContext;
-    ArrayList<AcademicClass> mArrayList;
+    List<AcademicClass> mArrayList;
     LayoutInflater inflater;
     TextView sub,course,starttime,endtime,room;
 
-    public RoutineAdapter(Context mContext, ArrayList<AcademicClass> mArrayList) {
+    public RoutineAdapter(Context mContext, List<AcademicClass> mArrayList) {
         this.mContext = mContext;
         this.mArrayList = mArrayList;
         inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

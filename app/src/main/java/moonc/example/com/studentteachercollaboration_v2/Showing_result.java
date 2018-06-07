@@ -1,15 +1,11 @@
 package moonc.example.com.studentteachercollaboration_v2;
 
-import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import moonc.example.com.studentteachercollaboration_v2.Adapters.RoutineAdapter;
 import moonc.example.com.studentteachercollaboration_v2.Contstants.Constants;
@@ -25,36 +22,51 @@ import moonc.example.com.studentteachercollaboration_v2.Models.AcademicClass;
 
 public class Showing_result extends AppCompatActivity {
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
     ListView listView;
     String Session_, Day_;
     int From;
     RoutineAdapter routineAdapter;
     ArrayList<AcademicClass> mArrayList;
     ArrayList<ArrayList<AcademicClass>> allRoutines = new ArrayList<>();
-    ArrayList<AcademicClass> sunday = new ArrayList<>();
-    ArrayList<AcademicClass> monday = new ArrayList<>();
-    ArrayList<AcademicClass> tuesday = new ArrayList<>();
-    ArrayList<AcademicClass> wednesday = new ArrayList<>();
-    ArrayList<AcademicClass> thursday = new ArrayList<>();
-    ArrayList<AcademicClass> friday = new ArrayList<>();
-    ArrayList<AcademicClass> saturday = new ArrayList<>();
+    int today = Constants.MIN_DAY_OF_WEEK; //day of week
+    ImageButton nextDayButton;
+    ImageButton previousDayButton;
+    TextView todayTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showing_result);
-        initializeArrayLists();
+        initializeVariables();
+        initializeViews();
         getAllRoutinesFromServer("2013-14");
+        showCurrentDayRoutine();
 
+        nextDayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                today++;
+                if (today >= Constants.MAX_DAY_OF_WEEK)
+                    today = Constants.MIN_DAY_OF_WEEK;
+                showCurrentDayRoutine();
+            }
+        });
+        previousDayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                today--;
+                if (today < Constants.MIN_DAY_OF_WEEK)
+                    today = Constants.MAX_DAY_OF_WEEK - 1;
+                showCurrentDayRoutine();
+            }
+        });
         // TODO: remove unnecessary codes
 
        /* Intent intent = getIntent();
         Session_ = intent.getStringExtra("session");
         Day_ = intent.getStringExtra("day");
         From = intent.getIntExtra("from", 0);
-        init_view();
+
         init_variables();
 
 
@@ -92,7 +104,7 @@ public class Showing_result extends AppCompatActivity {
     }
 
 
-    private void updateOrDelete(final int position) {
+   /* private void updateOrDelete(final int position) {
         ImageButton delete, update;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -128,26 +140,29 @@ public class Showing_result extends AppCompatActivity {
         });
     }
 
-    private void init_view() {
-        listView = (ListView) findViewById(R.id.lv_);
-    }
-
     private void init_variables() {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Routine").child(Session_).child(Day_);
         mArrayList = new ArrayList<>();
 
+    }*/
+
+    private void initializeViews() {
+        nextDayButton = (ImageButton) findViewById(R.id.viewNextDayButton);
+        previousDayButton = (ImageButton) findViewById(R.id.viewPreviousDayButton);
+        listView = (ListView) findViewById(R.id.lv_);
+        todayTextView = (TextView) findViewById(R.id.viewDayTBx);
     }
 
-    private void initializeArrayLists() {
+    private void initializeVariables() {
+        Calendar calendar = Calendar.getInstance();
+        today = calendar.get(Calendar.DAY_OF_WEEK);
         //Adding empty arraylist
-        int numberOfDayInWeek = 7;
-        for (int i = 0; i < numberOfDayInWeek; i++) {
+        for (int i = 0; i < Constants.MAX_DAY_OF_WEEK; i++) {
             allRoutines.add(new ArrayList<AcademicClass>());
         }
     }
 
-    // TODO  : get all data from server and store to a arraylist
     private void getAllRoutinesFromServer(String session) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("Routine")
@@ -155,15 +170,13 @@ public class Showing_result extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                // Log.d(Constants.LOGTAG, dataSnapshot.toString());
-                int count = 0;
+                int index;
                 for (DataSnapshot day : dataSnapshot.getChildren()) {
+                    index = getIndexForKey(day.getKey());
                     for (DataSnapshot routine : day.getChildren()) {
                         AcademicClass academicClass = routine.getValue(AcademicClass.class);
-                        allRoutines.get(count).add(academicClass);
+                        allRoutines.get(index).add(academicClass);
                     }
-                    count++;
                 }
             }
 
@@ -172,5 +185,32 @@ public class Showing_result extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void showCurrentDayRoutine() {
+        String nameOfToday = Constants.NAME_OF_DAY_IN_WEEK[today];
+        todayTextView.setText(nameOfToday);
+        routineAdapter = new RoutineAdapter(Showing_result.this,
+                allRoutines.get(today));
+        listView.setAdapter(routineAdapter);
+    }
+
+    private int getIndexForKey(String key) {
+        if (key.equalsIgnoreCase(Constants.NAME_OF_DAY_IN_WEEK[0]))
+            return 0;
+        else if (key.equalsIgnoreCase(Constants.NAME_OF_DAY_IN_WEEK[1]))
+            return 1;
+        else if (key.equalsIgnoreCase(Constants.NAME_OF_DAY_IN_WEEK[2]))
+            return 2;
+        else if (key.equalsIgnoreCase(Constants.NAME_OF_DAY_IN_WEEK[3]))
+            return 3;
+        else if (key.equalsIgnoreCase(Constants.NAME_OF_DAY_IN_WEEK[4]))
+            return 4;
+        else if (key.equalsIgnoreCase(Constants.NAME_OF_DAY_IN_WEEK[5]))
+            return 5;
+        else if (key.equalsIgnoreCase(Constants.NAME_OF_DAY_IN_WEEK[6]))
+            return 6;
+        return 0;
+
     }
 }
