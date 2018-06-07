@@ -1,4 +1,4 @@
-package moonc.example.com.studentteachercollaboration_v2;
+package moonc.example.com.studentteachercollaboration_v2.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,14 +10,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import moonc.example.com.studentteachercollaboration_v2.Models.AcademicClass;
+import moonc.example.com.studentteachercollaboration_v2.R;
 
-public class AdapterForRoutine extends BaseAdapter {
+public class RoutineAdapter extends BaseAdapter {
     Context mContext;
     ArrayList<AcademicClass> mArrayList;
     LayoutInflater inflater;
     TextView sub,course,starttime,endtime,room;
 
-    public AdapterForRoutine(Context mContext, ArrayList<AcademicClass> mArrayList) {
+    public RoutineAdapter(Context mContext, ArrayList<AcademicClass> mArrayList) {
         this.mContext = mContext;
         this.mArrayList = mArrayList;
         inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

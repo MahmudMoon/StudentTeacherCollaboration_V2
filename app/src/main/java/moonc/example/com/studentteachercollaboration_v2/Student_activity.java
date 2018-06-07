@@ -86,7 +86,6 @@ public class Student_activity extends AppCompatActivity {
         intent.putExtra("session",session);
         intent.putExtra("day",day_);
         intent.putExtra("from",1);
-        Toast.makeText(getApplicationContext(),"Session : " + session + "day" + day_,Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 }

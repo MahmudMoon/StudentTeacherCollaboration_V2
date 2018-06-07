@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import moonc.example.com.studentteachercollaboration_v2.Adapters.StudentAdapter;
 import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 
 public class Admin extends AppCompatActivity {
@@ -47,8 +48,8 @@ public class Admin extends AppCompatActivity {
                     employees_detail.add(value);
                 }
                 progressBar.setVisibility(View.INVISIBLE);
-                Adapter adapter = new Adapter(getApplicationContext(), employees_detail);
-                listView.setAdapter(adapter);
+                StudentAdapter studentAdapter = new StudentAdapter(getApplicationContext(), employees_detail);
+                listView.setAdapter(studentAdapter);
             }
 
             @Override

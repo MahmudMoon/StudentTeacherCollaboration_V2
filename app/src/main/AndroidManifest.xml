@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="moonc.example.com.studentteachercollaboration_v2">
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -22,11 +21,7 @@
         <activity
             android:name=".Admin"
             android:label="@string/title_activity_admin">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
 
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
         </activity>
         <activity android:name=".Add" />
         <activity android:name=".Update" />
@@ -36,7 +31,13 @@
         <activity android:name=".Routine" />
         <activity android:name=".Routine_Add" />
         <activity android:name=".Day" />
-        <activity android:name=".Showing_result"></activity>
+        <activity android:name=".Showing_result">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

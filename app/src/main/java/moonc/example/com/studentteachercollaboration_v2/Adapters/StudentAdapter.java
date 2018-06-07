@@ -1,4 +1,4 @@
-package moonc.example.com.studentteachercollaboration_v2;
+package moonc.example.com.studentteachercollaboration_v2.Adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,14 +13,15 @@ import java.util.ArrayList;
 
 import moonc.example.com.studentteachercollaboration_v2.Contstants.Constants;
 import moonc.example.com.studentteachercollaboration_v2.Models.Student;
+import moonc.example.com.studentteachercollaboration_v2.R;
 
-public class Adapter extends BaseAdapter {
+public class StudentAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater layoutInflater;
     private ArrayList<Student> mArrayList;
     private TextView name_, email_id, phone_num_;
 
-    public Adapter(Context mContext, ArrayList<Student> mArrayList) {
+    public StudentAdapter(Context mContext, ArrayList<Student> mArrayList) {
         this.mContext = mContext;
         this.mArrayList = mArrayList;
         layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -52,9 +53,6 @@ public class Adapter extends BaseAdapter {
         name_.setText(mArrayList.get(position).getName());
         email_id.setText(mArrayList.get(position).getEmail_id_number());
         phone_num_.setText(mArrayList.get(position).getPhone_number());
-
-        Log.d(Constants.LOGTAG, "email : " + mArrayList.get(position).getEmail_id_number());
-
         return view;
     }
 }
