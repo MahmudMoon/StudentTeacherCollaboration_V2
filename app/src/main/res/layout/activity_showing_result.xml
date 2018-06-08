@@ -67,9 +67,26 @@
             app:srcCompat="@drawable/right1" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lv_"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv_"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/routine_add_floating_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone"
+            app:fabSize="normal"
+            app:srcCompat="@android:drawable/ic_menu_add" />
+    </FrameLayout>
 
 </LinearLayout>

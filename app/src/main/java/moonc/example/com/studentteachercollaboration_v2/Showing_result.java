@@ -1,6 +1,7 @@
 package moonc.example.com.studentteachercollaboration_v2;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class Showing_result extends AppCompatActivity {
     TextView todayTextView;
     Spinner sessionSpinner;
     boolean isAdmin;
+    FloatingActionButton addRoutineButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class Showing_result extends AppCompatActivity {
         setContentView(R.layout.activity_showing_result);
         initializeViews();
         initializeVariables();
-        Log.d(Constants.LOGTAG, "session from routine : " +session);
+        Log.d(Constants.LOGTAG, "session from routine : " + session);
         getAllRoutinesFromServer(session);
 
         nextDayButton.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +96,16 @@ public class Showing_result extends AppCompatActivity {
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+            addRoutineButton.setVisibility(View.VISIBLE);
+
+            addRoutineButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Showing_result.this, RoutineAddOrUpdate.class);
+                    startActivity(intent);
                 }
             });
         }
@@ -144,6 +156,7 @@ public class Showing_result extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lv_);
         todayTextView = (TextView) findViewById(R.id.viewDayTBx);
         sessionSpinner = (Spinner) findViewById(R.id.session_spinner);
+        addRoutineButton = (FloatingActionButton) findViewById(R.id.routine_add_floating_button);
     }
 
     private void initializeVariables() {
