@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,17 +33,15 @@ public class Showing_result extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ListView listView;
-    String session = "2013-14";
-    String Day_;
-    int From;
+    String session = "";
     RoutineAdapter routineAdapter;
-    ArrayList<AcademicClass> mArrayList;
     ArrayList<ArrayList<AcademicClass>> allRoutines = new ArrayList<>();
-    int today = Constants.MIN_DAY_OF_WEEK; //day of week
+    int today = Constants.MIN_DAY_OF_WEEK;
     ImageButton nextDayButton;
     ImageButton previousDayButton;
     TextView todayTextView;
     Spinner sessionSpinner;
+    boolean isAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,7 @@ public class Showing_result extends AppCompatActivity {
         setContentView(R.layout.activity_showing_result);
         initializeViews();
         initializeVariables();
+        Log.d(Constants.LOGTAG, "session from routine : " +session);
         getAllRoutinesFromServer(session);
 
         nextDayButton.setOnClickListener(new View.OnClickListener() {
@@ -70,28 +71,33 @@ public class Showing_result extends AppCompatActivity {
             }
         });
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                updateOrDelete(position);
-                return false;
-            }
-        });
+        // Only admin has these privileges
+        if (isAdmin) {
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    updateOrDelete(position);
+                    return false;
+                }
+            });
 
-        sessionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                session = (String) sessionSpinner.getSelectedItem();
-                getAllRoutinesFromServer(session);
-            }
+            LinearLayout linearLayout = (LinearLayout) findViewById(
+                    R.id.routine_spinner_linear_layout);
+            linearLayout.setVisibility(View.VISIBLE);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            sessionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    session = (String) sessionSpinner.getSelectedItem();
+                    getAllRoutinesFromServer(session);
+                }
 
-            }
-        });
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        }
     }
-
 
     private void updateOrDelete(final int position) {
         ImageButton delete, update;
@@ -141,7 +147,6 @@ public class Showing_result extends AppCompatActivity {
     }
 
     private void initializeVariables() {
-        session = (String) sessionSpinner.getSelectedItem();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Routine")
                 .child(session);
@@ -151,12 +156,24 @@ public class Showing_result extends AppCompatActivity {
         for (int i = 0; i < Constants.MAX_DAY_OF_WEEK; i++) {
             allRoutines.add(new ArrayList<AcademicClass>());
         }
+
+        Bundle bundle = getIntent().getExtras();
+        try {
+            isAdmin = bundle.getBoolean(Constants.IS_ADMIN);
+            session = bundle.getString(Constants.SESSION);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
+        if (isAdmin)
+            session = (String) sessionSpinner.getSelectedItem();
     }
 
     private void getAllRoutinesFromServer(String session) {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Routine")
                 .child(session);
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

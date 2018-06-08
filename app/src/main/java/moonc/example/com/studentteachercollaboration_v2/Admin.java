@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import moonc.example.com.studentteachercollaboration_v2.Adapters.StudentAdapter;
+import moonc.example.com.studentteachercollaboration_v2.Contstants.Constants;
 import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 
 public class Admin extends AppCompatActivity {
@@ -48,7 +49,8 @@ public class Admin extends AppCompatActivity {
                     employees_detail.add(value);
                 }
                 progressBar.setVisibility(View.INVISIBLE);
-                StudentAdapter studentAdapter = new StudentAdapter(getApplicationContext(), employees_detail);
+                StudentAdapter studentAdapter = new StudentAdapter(getApplicationContext(),
+                        employees_detail);
                 listView.setAdapter(studentAdapter);
             }
 
@@ -79,6 +81,7 @@ public class Admin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Admin.this, Showing_result.class);
+                intent.putExtra(Constants.IS_ADMIN,true);
                 startActivity(intent);
             }
         });

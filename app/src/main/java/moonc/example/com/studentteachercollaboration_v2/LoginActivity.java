@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import moonc.example.com.studentteachercollaboration_v2.Contstants.Constants;
 import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 
 public class LoginActivity extends AppCompatActivity {
@@ -91,18 +92,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
-
-        // to avoid firebase authentication,,,,
-        boolean b = true;
-        if (b) {
-
-            Intent intent = new Intent(LoginActivity.this, Admin.class);
-            startActivity(intent);
-            return;
-        }
-
-        Toast.makeText(getApplicationContext(), "Stop", Toast.LENGTH_SHORT).show();
-
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -146,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             });
-        } else if (selectedItem.equals("Student")) {
+        } else if (selectedItem.equalsIgnoreCase("Student")) {
             LoginAsRole(email, password, selectedItem);
         } else {
             LoginAsRole(email, password, selectedItem);
@@ -159,6 +148,7 @@ public class LoginActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean isAuthenticated = false;
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Student detail = data.getValue(Student.class);
                     String Email = detail.getEmail_id_number();
@@ -166,20 +156,27 @@ public class LoginActivity extends AppCompatActivity {
                     String Role = detail.getRole();
 
                     if (Email.equals(email) && Password.equals(password) && Role.equals(role)) {
+                        isAuthenticated = true;
                         if (Role.equals("Student")) {
                             String Session = detail.getSession();
-                            Intent intent = new Intent(LoginActivity.this, Student_activity.class);
+                            Intent intent = new Intent(LoginActivity.this,
+                                    Showing_result.class);
                             intent.putExtra("session", Session);
+                            intent.putExtra(Constants.IS_ADMIN, false);
                             startActivity(intent);
                             break;
 
                         } else {
-                            Intent intent = new Intent(LoginActivity.this, Teacher_activity.class);
+                            Intent intent = new Intent(LoginActivity.this,
+                                    Teacher_activity.class);
                             startActivity(intent);
                             break;
                         }
                     }
                 }
+                if (!isAuthenticated)
+                    Toast.makeText(getApplicationContext(), "Incorrect Email or Password!",
+                            Toast.LENGTH_SHORT).show();
             }
 
             @Override

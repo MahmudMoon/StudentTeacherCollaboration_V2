@@ -8,26 +8,28 @@
     tools:context=".Showing_result">
 
     <LinearLayout
-        android:layout_margin="8dp"
+        android:id="@+id/routine_spinner_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_margin="8dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Session : "
+            android:layout_weight="1"
             android:gravity="right"
-            android:textSize="20sp"
-            android:layout_weight="1"/>
+            android:text="Session : "
+            android:textSize="20sp" />
 
         <Spinner
             android:id="@+id/session_spinner"
-            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:entries="@array/session"
-            android:layout_weight="1"/>
+            android:gravity="center" />
     </LinearLayout>
 
 
