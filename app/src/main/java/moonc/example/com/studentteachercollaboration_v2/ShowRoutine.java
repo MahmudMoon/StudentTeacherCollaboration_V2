@@ -29,7 +29,7 @@ import moonc.example.com.studentteachercollaboration_v2.Adapters.RoutineAdapter;
 import moonc.example.com.studentteachercollaboration_v2.Contstants.Constants;
 import moonc.example.com.studentteachercollaboration_v2.Models.AcademicClass;
 
-public class Showing_result extends AppCompatActivity {
+public class ShowRoutine extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -104,7 +104,7 @@ public class Showing_result extends AppCompatActivity {
             addRoutineButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Showing_result.this, RoutineAddOrUpdate.class);
+                    Intent intent = new Intent(ShowRoutine.this, RoutineAddOrUpdate.class);
                     startActivity(intent);
                 }
             });
@@ -129,7 +129,7 @@ public class Showing_result extends AppCompatActivity {
                 String nameOfDay = Constants.NAME_OF_DAY_IN_WEEK[today];
                 String key = allRoutines.get(today).get(position).getKey();
                 databaseReference.child(nameOfDay).child(key).removeValue();
-                Toast.makeText(Showing_result.this,
+                Toast.makeText(ShowRoutine.this,
                         "Deleted!", Toast.LENGTH_SHORT).show();
                 alertDialog.cancel();
             }
@@ -140,7 +140,7 @@ public class Showing_result extends AppCompatActivity {
             public void onClick(View v) {
                 String nameOfDay = Constants.NAME_OF_DAY_IN_WEEK[today];
                 String key = allRoutines.get(today).get(position).getKey();
-                Intent intent = new Intent(Showing_result.this, RoutineAddOrUpdate.class);
+                Intent intent = new Intent(ShowRoutine.this, RoutineAddOrUpdate.class);
                 intent.putExtra("session", session);
                 intent.putExtra("day", nameOfDay);
                 intent.putExtra("key", key);
@@ -212,7 +212,7 @@ public class Showing_result extends AppCompatActivity {
     private void showCurrentDayRoutine() {
         String nameOfToday = Constants.NAME_OF_DAY_IN_WEEK[today];
         todayTextView.setText(nameOfToday);
-        routineAdapter = new RoutineAdapter(Showing_result.this,
+        routineAdapter = new RoutineAdapter(ShowRoutine.this,
                 allRoutines.get(today));
         listView.setAdapter(routineAdapter);
     }

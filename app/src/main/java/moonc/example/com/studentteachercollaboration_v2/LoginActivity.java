@@ -160,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (Role.equals("Student")) {
                             String Session = detail.getSession();
                             Intent intent = new Intent(LoginActivity.this,
-                                    Showing_result.class);
+                                    ShowRoutine.class);
                             intent.putExtra("session", Session);
                             intent.putExtra(Constants.IS_ADMIN, false);
                             startActivity(intent);

@@ -80,7 +80,7 @@ public class Admin extends AppCompatActivity {
         routine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Admin.this, Showing_result.class);
+                Intent intent = new Intent(Admin.this, ShowRoutine.class);
                 intent.putExtra(Constants.IS_ADMIN,true);
                 startActivity(intent);
             }
