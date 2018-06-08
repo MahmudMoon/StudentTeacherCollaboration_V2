@@ -48,7 +48,7 @@ public class Showing_result extends AppCompatActivity {
         setContentView(R.layout.activity_showing_result);
         initializeVariables();
         initializeViews();
-        getAllRoutinesFromServer("2013-14");
+        getAllRoutinesFromServer(session);
         showCurrentDayRoutine();
 
         nextDayButton.setOnClickListener(new View.OnClickListener() {
@@ -69,38 +69,7 @@ public class Showing_result extends AppCompatActivity {
                 showCurrentDayRoutine();
             }
         });
-        // TODO: remove unnecessary codes
 
-       /* Intent intent = getIntent();
-        session = intent.getStringExtra("session");
-        Day_ = intent.getStringExtra("day");
-        From = intent.getIntExtra("from", 0);
-
-        init_variables();
-
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mArrayList.clear();
-
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    AcademicClass academicClass = data.getValue(AcademicClass.class);
-                    mArrayList.add(academicClass);
-                }
-                routineAdapter = new RoutineAdapter(getApplicationContext(), mArrayList);
-                listView.setAdapter(routineAdapter);
-               *//* Toast.makeText(getApplicationContext(),
-                        Integer.toString(mArrayList.size()), Toast.LENGTH_SHORT).show();*//*
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        if (From == 0) {*/
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -138,20 +107,16 @@ public class Showing_result extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Key = mArrayList.get(position).getKey();
+                String nameOfDay = Constants.NAME_OF_DAY_IN_WEEK[today];
+                String key = allRoutines.get(today).get(position).getKey();
                 Intent intent = new Intent(Showing_result.this, Routine_Add.class);
                 intent.putExtra("session", session);
-                intent.putExtra("day", Day_);
+                intent.putExtra("day", nameOfDay);
+                intent.putExtra("key", key);
                 startActivity(intent);
+                alertDialog.cancel();
             }
         });
-    }
-
-    private void init_variables() {
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Routine").child(session).child(Day_);
-        mArrayList = new ArrayList<>();
-
     }
 
     private void initializeViews() {
