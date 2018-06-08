@@ -1,11 +1,17 @@
 package moonc.example.com.studentteachercollaboration_v2;
 
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,8 +28,11 @@ import moonc.example.com.studentteachercollaboration_v2.Models.AcademicClass;
 
 public class Showing_result extends AppCompatActivity {
 
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
     ListView listView;
-    String Session_, Day_;
+    String session = "2013-14";
+    String Day_;
     int From;
     RoutineAdapter routineAdapter;
     ArrayList<AcademicClass> mArrayList;
@@ -63,7 +72,7 @@ public class Showing_result extends AppCompatActivity {
         // TODO: remove unnecessary codes
 
        /* Intent intent = getIntent();
-        Session_ = intent.getStringExtra("session");
+        session = intent.getStringExtra("session");
         Day_ = intent.getStringExtra("day");
         From = intent.getIntExtra("from", 0);
 
@@ -91,20 +100,18 @@ public class Showing_result extends AppCompatActivity {
             }
         });
 
-        if (From == 0) {
-            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                    updateOrDelete(position);
-                    return false;
-                }
-            });
-        }
-*/
+        if (From == 0) {*/
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                updateOrDelete(position);
+                return false;
+            }
+        });
     }
 
 
-   /* private void updateOrDelete(final int position) {
+    private void updateOrDelete(final int position) {
         ImageButton delete, update;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -119,8 +126,9 @@ public class Showing_result extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Key = mArrayList.get(position).getKey();
-                databaseReference.child(Key).removeValue();
+                String nameOfDay = Constants.NAME_OF_DAY_IN_WEEK[today];
+                String key = allRoutines.get(today).get(position).getKey();
+                databaseReference.child(nameOfDay).child(key).removeValue();
                 Toast.makeText(Showing_result.this,
                         "Deleted!", Toast.LENGTH_SHORT).show();
                 alertDialog.cancel();
@@ -132,9 +140,8 @@ public class Showing_result extends AppCompatActivity {
             public void onClick(View v) {
                 String Key = mArrayList.get(position).getKey();
                 Intent intent = new Intent(Showing_result.this, Routine_Add.class);
-                intent.putExtra("session", Session_);
+                intent.putExtra("session", session);
                 intent.putExtra("day", Day_);
-                intent.putExtra("period", Key);
                 startActivity(intent);
             }
         });
@@ -142,10 +149,10 @@ public class Showing_result extends AppCompatActivity {
 
     private void init_variables() {
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Routine").child(Session_).child(Day_);
+        databaseReference = firebaseDatabase.getReference("Routine").child(session).child(Day_);
         mArrayList = new ArrayList<>();
 
-    }*/
+    }
 
     private void initializeViews() {
         nextDayButton = (ImageButton) findViewById(R.id.viewNextDayButton);
@@ -155,6 +162,9 @@ public class Showing_result extends AppCompatActivity {
     }
 
     private void initializeVariables() {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Routine")
+                .child(session);
         Calendar calendar = Calendar.getInstance();
         today = calendar.get(Calendar.DAY_OF_WEEK);
         //Adding empty arraylist
@@ -164,12 +174,13 @@ public class Showing_result extends AppCompatActivity {
     }
 
     private void getAllRoutinesFromServer(String session) {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("Routine")
-                .child("2013-14");
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Routine")
+                .child(session);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                clearAllRoutines();
                 int index;
                 for (DataSnapshot day : dataSnapshot.getChildren()) {
                     index = getIndexForKey(day.getKey());
@@ -178,6 +189,7 @@ public class Showing_result extends AppCompatActivity {
                         allRoutines.get(index).add(academicClass);
                     }
                 }
+                showCurrentDayRoutine();
             }
 
             @Override
@@ -211,6 +223,11 @@ public class Showing_result extends AppCompatActivity {
         else if (key.equalsIgnoreCase(Constants.NAME_OF_DAY_IN_WEEK[6]))
             return 6;
         return 0;
+    }
 
+    private void clearAllRoutines() {
+        for (int i = 0; i < Constants.MAX_DAY_OF_WEEK; i++) {
+            allRoutines.get(i).clear();
+        }
     }
 }
