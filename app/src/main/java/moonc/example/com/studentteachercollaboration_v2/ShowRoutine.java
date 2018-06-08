@@ -22,8 +22,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Locale;
 
 import moonc.example.com.studentteachercollaboration_v2.Adapters.RoutineAdapter;
 import moonc.example.com.studentteachercollaboration_v2.Contstants.Constants;
@@ -212,6 +216,8 @@ public class ShowRoutine extends AppCompatActivity {
     private void showCurrentDayRoutine() {
         String nameOfToday = Constants.NAME_OF_DAY_IN_WEEK[today];
         todayTextView.setText(nameOfToday);
+        //sorting arraylist
+        sortAccordingToStartTime(allRoutines.get(today));
         routineAdapter = new RoutineAdapter(ShowRoutine.this,
                 allRoutines.get(today));
         listView.setAdapter(routineAdapter);
@@ -239,5 +245,27 @@ public class ShowRoutine extends AppCompatActivity {
         for (int i = 0; i < Constants.MAX_DAY_OF_WEEK; i++) {
             allRoutines.get(i).clear();
         }
+    }
+
+    private void sortAccordingToStartTime(ArrayList<AcademicClass> currentDayData) {
+        Collections.sort(currentDayData, new Comparator<AcademicClass>() {
+            @Override
+            public int compare(AcademicClass lhs, AcademicClass rhs) {
+                SimpleDateFormat format = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                String timeLHS = lhs.getStart();
+                String timeRHS = rhs.getEnd();
+                Calendar calendarRHD = Calendar.getInstance();
+                Calendar calendarLHS = Calendar.getInstance();
+
+                try {
+                    calendarLHS.setTime(format.parse(timeLHS));
+                    calendarRHD.setTime(format.parse(timeRHS));
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return calendarLHS.compareTo(calendarRHD);
+            }
+        });
     }
 }

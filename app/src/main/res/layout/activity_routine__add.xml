@@ -79,6 +79,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:clickable="true"
+            android:focusable="true"
             android:text="9 AM" />
 
     </LinearLayout>
@@ -105,6 +107,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:clickable="true"
+            android:focusable="true"
             android:text="10 AM" />
 
     </LinearLayout>
