@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 import moonc.example.com.studentteachercollaboration_v2.Models.AcademicClass;
 
-public class Routine_Add extends AppCompatActivity {
+public class RoutineAddOrUpdate extends AppCompatActivity {
 
     Spinner spn_session, spn_day;
     EditText et_subject, et_course;

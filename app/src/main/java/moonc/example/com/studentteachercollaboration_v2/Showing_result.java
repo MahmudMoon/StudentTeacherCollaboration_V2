@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,15 +41,15 @@ public class Showing_result extends AppCompatActivity {
     ImageButton nextDayButton;
     ImageButton previousDayButton;
     TextView todayTextView;
+    Spinner sessionSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showing_result);
-        initializeVariables();
         initializeViews();
+        initializeVariables();
         getAllRoutinesFromServer(session);
-        showCurrentDayRoutine();
 
         nextDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +75,19 @@ public class Showing_result extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 updateOrDelete(position);
                 return false;
+            }
+        });
+
+        sessionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                session = (String) sessionSpinner.getSelectedItem();
+                getAllRoutinesFromServer(session);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
@@ -109,7 +122,7 @@ public class Showing_result extends AppCompatActivity {
             public void onClick(View v) {
                 String nameOfDay = Constants.NAME_OF_DAY_IN_WEEK[today];
                 String key = allRoutines.get(today).get(position).getKey();
-                Intent intent = new Intent(Showing_result.this, Routine_Add.class);
+                Intent intent = new Intent(Showing_result.this, RoutineAddOrUpdate.class);
                 intent.putExtra("session", session);
                 intent.putExtra("day", nameOfDay);
                 intent.putExtra("key", key);
@@ -124,9 +137,11 @@ public class Showing_result extends AppCompatActivity {
         previousDayButton = (ImageButton) findViewById(R.id.viewPreviousDayButton);
         listView = (ListView) findViewById(R.id.lv_);
         todayTextView = (TextView) findViewById(R.id.viewDayTBx);
+        sessionSpinner = (Spinner) findViewById(R.id.session_spinner);
     }
 
     private void initializeVariables() {
+        session = (String) sessionSpinner.getSelectedItem();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Routine")
                 .child(session);

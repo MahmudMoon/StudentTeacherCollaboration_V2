@@ -4,8 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Showing_result"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Showing_result">
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Session : "
+            android:gravity="right"
+            android:textSize="20sp"
+            android:layout_weight="1"/>
+
+        <Spinner
+            android:id="@+id/session_spinner"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/session"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,7 +68,6 @@
     <ListView
         android:id="@+id/lv_"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ListView>
+        android:layout_height="match_parent"></ListView>
 
 </LinearLayout>

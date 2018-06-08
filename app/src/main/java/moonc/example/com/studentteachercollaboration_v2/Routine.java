@@ -5,11 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class Routine extends AppCompatActivity {
 
@@ -35,7 +31,7 @@ public class Routine extends AppCompatActivity {
         btn_routine_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Routine.this,Routine_Add.class);
+                Intent intent = new Intent(Routine.this,RoutineAddOrUpdate.class);
                 startActivity(intent);
             }
         });
