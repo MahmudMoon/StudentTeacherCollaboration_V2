@@ -83,7 +83,7 @@ public class AdminHome extends AppCompatActivity {
     private void updateOrDelete(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.alertdialog, null);
+        View view = inflater.inflate(R.layout.alert_dialog, null);
         builder.setView(view);
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();

@@ -6,8 +6,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -130,7 +128,7 @@ public class ShowRoutine extends AppCompatActivity {
         ImageButton delete, update;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.alertdialog, null);
+        View view = inflater.inflate(R.layout.alert_dialog, null);
         builder.setView(view);
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
