@@ -48,6 +48,7 @@ public class SendMessage extends AppCompatActivity {
                     Toast.makeText(SendMessage.this, "Message sent!",
                             Toast.LENGTH_SHORT).show();
                     messageEditText.setText("");
+                    finish();
                 } else {
                     messageEditText.setError("This field can not be empty");
                 }

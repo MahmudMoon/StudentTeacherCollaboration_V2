@@ -64,7 +64,7 @@ public class AdminHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //  alertDialog.show();
-                Intent intent = new Intent(AdminHome.this, StudentAdd.class);
+                Intent intent = new Intent(AdminHome.this, UserAdd.class);
                 startActivity(intent);
             }
         });
@@ -111,7 +111,7 @@ public class AdminHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String Key = employees_detail.get(position).getKey();
-                Intent intent = new Intent(AdminHome.this, Update.class);
+                Intent intent = new Intent(AdminHome.this, UserUpdate.class);
                 intent.putExtra("Key", Key);
                 startActivity(intent);
             }
@@ -125,6 +125,7 @@ public class AdminHome extends AppCompatActivity {
 
     private void initializeViews() {
         listView = (ListView) findViewById(R.id.list_view);
+        listView.setDivider(null);
         addButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         routine = (FloatingActionButton) findViewById(R.id.routine_);

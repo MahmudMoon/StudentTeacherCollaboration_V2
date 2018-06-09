@@ -156,6 +156,7 @@ public class ShowRoutine extends AppCompatActivity {
         nextDayButton = (ImageButton) findViewById(R.id.viewNextDayButton);
         previousDayButton = (ImageButton) findViewById(R.id.viewPreviousDayButton);
         listView = (ListView) findViewById(R.id.lv_);
+        listView.setDivider(null);
         todayTextView = (TextView) findViewById(R.id.viewDayTBx);
         sessionSpinner = (Spinner) findViewById(R.id.session_spinner);
         addRoutineButton = (FloatingActionButton) findViewById(R.id.routine_add_floating_button);

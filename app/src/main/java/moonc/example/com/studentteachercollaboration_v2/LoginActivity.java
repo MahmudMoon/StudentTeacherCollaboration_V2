@@ -35,8 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private FirebaseAuth firebaseAuth;
-    private TextView register;
-    private TextView lost_pass;
     private Button mEmailSignInButton;
     Spinner spinner;
 
@@ -51,24 +49,6 @@ public class LoginActivity extends AppCompatActivity {
                 attemptLogin();
             }
         });
-
-        lost_pass.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, Working.class);
-                startActivity(intent);
-            }
-        });
-
-
-        register.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, Working.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     private void initializeViews() {
@@ -78,8 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView = (EditText) findViewById(R.id.password);
         mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mProgressView = findViewById(R.id.login_progress);
-        lost_pass = (TextView) findViewById(R.id.tv_lostPass);
-        register = (TextView) findViewById(R.id.tv_register);
     }
 
     @Override

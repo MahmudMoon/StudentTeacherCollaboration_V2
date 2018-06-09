@@ -73,7 +73,7 @@ public class RoutineAddOrUpdate extends AppCompatActivity {
 
         // If edit option is clicked
         if (checkIfEditable()) {
-            btn_add_clicked.setText("Update");
+            btn_add_clicked.setText("UserUpdate");
             final DatabaseReference databaseReference1 = FirebaseDatabase.getInstance()
                     .getReference("Routine").child(session_).child(day).child(key);
 

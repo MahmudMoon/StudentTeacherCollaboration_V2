@@ -20,7 +20,7 @@ import java.util.Arrays;
 
 import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 
-public class Update extends AppCompatActivity {
+public class UserUpdate extends AppCompatActivity {
 
     DatabaseReference databaseReference;
     EditText name_,email_,phone_,id_,password_;
@@ -127,7 +127,7 @@ public class Update extends AppCompatActivity {
                 id_.setText("");
                 password_.setText("");
 
-                Intent intent1 = new Intent(Update.this,AdminHome.class);
+                Intent intent1 = new Intent(UserUpdate.this,AdminHome.class);
                 startActivity(intent1);
             }
         });
