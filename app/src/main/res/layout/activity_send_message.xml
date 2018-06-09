@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="moonc.example.com.studentteachercollaboration_v2.SendMessage">
+    tools:context="test.example.com.studentteachercollaboration.SendMessage">
 
     <EditText
         android:id="@+id/message_edit_text"

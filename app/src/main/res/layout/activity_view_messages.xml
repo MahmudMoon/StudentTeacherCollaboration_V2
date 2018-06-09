@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="moonc.example.com.studentteachercollaboration_v2.ViewMessages">
+    tools:context="test.example.com.studentteachercollaboration.ViewMessages">
 
     <ListView
         android:id="@+id/message_list_view"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="moonc.example.com.studentteachercollaboration_v2">
+    package="test.example.com.studentteachercollaboration">
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name="test.example.com.studentteachercollaboration.LoginActivity"
             android:label="@string/title_activity_login">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,47 +23,47 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AdminHome"
+            android:name="test.example.com.studentteachercollaboration.AdminHome"
             android:label="@string/admin_panel">
 
         </activity>
         <activity
-            android:name=".UserAdd"
+            android:name="test.example.com.studentteachercollaboration.UserAdd"
             android:label="@string/add_user">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AdminHome" />
+                android:value="test.example.com.studentteachercollaboration.AdminHome" />
         </activity>
-        <activity android:name=".UserUpdate" />
-        <activity android:name=".RoutineAddOrUpdate">
+        <activity android:name="test.example.com.studentteachercollaboration.UserUpdate" />
+        <activity android:name="test.example.com.studentteachercollaboration.RoutineAddOrUpdate">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AdminHome" />
+                android:value="test.example.com.studentteachercollaboration.AdminHome" />
         </activity>
         <activity
-            android:name=".ShowRoutine"
+            android:name="test.example.com.studentteachercollaboration.ShowRoutine"
             android:label="@string/view_routine" />
         <activity
-            android:name=".SendMessage"
+            android:name="test.example.com.studentteachercollaboration.SendMessage"
             android:label="@string/write_message">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ShowRoutine" />
+                android:value="test.example.com.studentteachercollaboration.ShowRoutine" />
         </activity>
         <activity
-            android:name=".ViewMessages"
+            android:name="test.example.com.studentteachercollaboration.ViewMessages"
             android:label="@string/view_message">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AdminHome" />
+                android:value="test.example.com.studentteachercollaboration.AdminHome" />
         </activity>
 
-        <service android:name=".Services.NotificationService">
+        <service android:name="test.example.com.studentteachercollaboration.Services.NotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".FirebaseIDService">
+        <service android:name="test.example.com.studentteachercollaboration.FirebaseIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
