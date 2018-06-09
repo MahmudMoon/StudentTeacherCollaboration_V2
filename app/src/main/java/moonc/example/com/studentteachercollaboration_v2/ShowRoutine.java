@@ -38,7 +38,7 @@ public class ShowRoutine extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ListView listView;
-    String session = "";
+    String session;
     RoutineAdapter routineAdapter;
     ArrayList<ArrayList<AcademicClass>> allRoutines = new ArrayList<>();
     int today = Constants.MIN_DAY_OF_WEEK;
@@ -55,7 +55,6 @@ public class ShowRoutine extends AppCompatActivity {
         setContentView(R.layout.activity_showing_result);
         initializeViews();
         initializeVariables();
-        Log.d(Constants.LOGTAG, "session from routine : " + session);
         getAllRoutinesFromServer(session);
 
         nextDayButton.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +101,6 @@ public class ShowRoutine extends AppCompatActivity {
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
             });
-
             addRoutineButton.setVisibility(View.VISIBLE);
 
             addRoutineButton.setOnClickListener(new View.OnClickListener() {
@@ -169,18 +167,16 @@ public class ShowRoutine extends AppCompatActivity {
                 .child(session);
         Calendar calendar = Calendar.getInstance();
         today = calendar.get(Calendar.DAY_OF_WEEK);
+        if (today == Constants.MAX_DAY_OF_WEEK)
+            today = Constants.MIN_DAY_OF_WEEK;
+
         //Adding empty arraylist
         for (int i = 0; i < Constants.MAX_DAY_OF_WEEK; i++) {
             allRoutines.add(new ArrayList<AcademicClass>());
         }
-
-        Bundle bundle = getIntent().getExtras();
-        try {
-            isAdmin = bundle.getBoolean(Constants.IS_ADMIN);
-            session = bundle.getString(Constants.SESSION);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+        Intent intent = getIntent();
+        isAdmin = intent.getBooleanExtra(Constants.IS_ADMIN, false);
+        session = intent.getStringExtra(Constants.SESSION);
 
         if (isAdmin)
             session = (String) sessionSpinner.getSelectedItem();
@@ -216,7 +212,8 @@ public class ShowRoutine extends AppCompatActivity {
     private void showCurrentDayRoutine() {
         String nameOfToday = Constants.NAME_OF_DAY_IN_WEEK[today];
         todayTextView.setText(nameOfToday);
-        //sorting arraylist
+
+        // Sorting arraylist
         sortAccordingToStartTime(allRoutines.get(today));
         routineAdapter = new RoutineAdapter(ShowRoutine.this,
                 allRoutines.get(today));

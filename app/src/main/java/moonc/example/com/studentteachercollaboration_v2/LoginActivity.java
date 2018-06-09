@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         String selectedItem = (String) spinner.getSelectedItem();
-        if (selectedItem.equals("AdminHome")) {
+        if (selectedItem.equalsIgnoreCase("Admin")) {
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
