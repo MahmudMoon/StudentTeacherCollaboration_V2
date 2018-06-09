@@ -3,6 +3,7 @@ package moonc.example.com.studentteachercollaboration_v2.Models;
 import java.util.Date;
 
 public class CustomMessage {
+    private String key;
     private String from;
     private String messageBody;
     private Date time;
@@ -33,5 +34,13 @@ public class CustomMessage {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

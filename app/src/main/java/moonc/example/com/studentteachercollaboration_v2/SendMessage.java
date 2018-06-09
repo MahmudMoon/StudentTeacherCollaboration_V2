@@ -43,6 +43,7 @@ public class SendMessage extends AppCompatActivity {
                     message1.setFrom("Shoukhin");
                     message1.setMessageBody(message);
                     message1.setTime(new Date());
+                    message1.setKey(key);
                     databaseReference.child(key).setValue(message1);
                     Toast.makeText(SendMessage.this, "Message sent!",
                             Toast.LENGTH_SHORT).show();
