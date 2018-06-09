@@ -15,26 +15,34 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name=".AdminHome"
-            android:label="@string/title_activity_admin"></activity>
-        <activity android:name=".StudentAdd" />
-        <activity android:name=".Update" />
-        <activity android:name=".Working" />
-        <activity android:name=".Teacher_activity" />
-        <activity android:name=".RoutineAddOrUpdate" />
-        <activity android:name=".ShowRoutine" />
-        <activity android:name=".SendMessage">
-
-        </activity>
-        <activity android:name=".ViewMessages">
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AdminHome"
+            android:label="@string/title_activity_admin"/>
+        <activity android:name=".StudentAdd" />
+        <activity android:name=".Update" />
+        <activity android:name=".Working" />
+        <activity android:name=".Teacher_activity" />
+        <activity android:name=".RoutineAddOrUpdate" />
+        <activity android:name=".ShowRoutine" />
+        <activity android:name=".SendMessage"/>
+        <activity android:name=".ViewMessages"/>
+        <service android:name=".Services.NotificationService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".FirebaseIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
