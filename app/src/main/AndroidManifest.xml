@@ -29,12 +29,34 @@
         </activity>
         <activity
             android:name=".UserAdd"
-            android:label="@string/add_user" />
+            android:label="@string/add_user">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminHome" />
+        </activity>
         <activity android:name=".UserUpdate" />
-        <activity android:name=".RoutineAddOrUpdate" />
-        <activity android:name=".ShowRoutine" />
-        <activity android:name=".SendMessage" />
-        <activity android:name=".ViewMessages" />
+        <activity android:name=".RoutineAddOrUpdate">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminHome" />
+        </activity>
+        <activity
+            android:name=".ShowRoutine"
+            android:label="@string/view_routine" />
+        <activity
+            android:name=".SendMessage"
+            android:label="@string/write_message">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ShowRoutine" />
+        </activity>
+        <activity
+            android:name=".ViewMessages"
+            android:label="@string/view_message">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdminHome" />
+        </activity>
 
         <service android:name=".Services.NotificationService">
             <intent-filter>

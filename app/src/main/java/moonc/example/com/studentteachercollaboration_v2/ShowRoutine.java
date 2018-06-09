@@ -78,12 +78,9 @@ public class ShowRoutine extends AppCompatActivity {
         });
 
         // Only admin and teacher has these privileges
-        if (role.equalsIgnoreCase(Constants.ADMIN)
-                || role.equalsIgnoreCase(Constants.TEACHER)) {
-            LinearLayout linearLayout = (LinearLayout) findViewById(
-                    R.id.routine_spinner_linear_layout);
-            linearLayout.setVisibility(View.VISIBLE);
+        if (role.equalsIgnoreCase(Constants.ADMIN)) {
 
+            makeVisibleSessionSpinner();
             sessionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -96,26 +93,36 @@ public class ShowRoutine extends AppCompatActivity {
                 }
             });
 
-            // Only admin can add or update routine
-            if (role.equalsIgnoreCase(Constants.ADMIN)) {
-                listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                        updateOrDelete(position);
-                        return false;
-                    }
-                });
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    updateOrDelete(position);
+                    return false;
+                }
+            });
 
-                addRoutineButton.setVisibility(View.VISIBLE);
+            addRoutineButton.setVisibility(View.VISIBLE);
 
-                addRoutineButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ShowRoutine.this, RoutineAddOrUpdate.class);
-                        startActivity(intent);
-                    }
-                });
-            }
+            addRoutineButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ShowRoutine.this, RoutineAddOrUpdate.class);
+                    startActivity(intent);
+                }
+            });
+        } else if (role.equalsIgnoreCase(Constants.TEACHER)) {
+            makeVisibleSessionSpinner();
+
+            // Change button functionality
+            addRoutineButton.setVisibility(View.VISIBLE);
+            addRoutineButton.setImageResource(android.R.drawable.ic_dialog_email);
+
+            addRoutineButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(ShowRoutine.this, SendMessage.class));
+                }
+            });
         }
     }
 
@@ -156,6 +163,12 @@ public class ShowRoutine extends AppCompatActivity {
                 alertDialog.cancel();
             }
         });
+    }
+
+    private void makeVisibleSessionSpinner() {
+        LinearLayout linearLayout = (LinearLayout) findViewById(
+                R.id.routine_spinner_linear_layout);
+        linearLayout.setVisibility(View.VISIBLE);
     }
 
     private void initializeViews() {
@@ -220,8 +233,6 @@ public class ShowRoutine extends AppCompatActivity {
     private void showCurrentDayRoutine() {
         String nameOfToday = Constants.NAME_OF_DAY_IN_WEEK[today];
         todayTextView.setText(nameOfToday);
-
-        // Sorting arraylist
         sortAccordingToStartTime(allRoutines.get(today));
         routineAdapter = new RoutineAdapter(ShowRoutine.this,
                 allRoutines.get(today));
@@ -272,22 +283,5 @@ public class ShowRoutine extends AppCompatActivity {
                 return calendarLHS.compareTo(calendarRHD);
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Only teacher has this privilege
-        if (role.equalsIgnoreCase(Constants.TEACHER))
-            getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.write_message_menu_button) {
-            startActivity(new Intent(ShowRoutine.this, SendMessage.class));
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -3,6 +3,9 @@
     <string name="title_activity_login">Student Teacher Collaboration</string>
     <string name="admin_panel">Admin Panel</string>
     <string name="add_user">Add User</string>
+    <string name="write_message">Write Message</string>
+    <string name="view_routine">View Routine</string>
+    <string name="view_message">View Message</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
