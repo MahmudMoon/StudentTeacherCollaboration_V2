@@ -25,7 +25,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="@+id/editText"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
@@ -36,7 +36,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Phone"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         app:layout_constraintStart_toStartOf="@+id/editText2"
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
@@ -69,7 +69,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="ID"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/et_password"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
