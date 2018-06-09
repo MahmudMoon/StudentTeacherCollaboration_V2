@@ -6,6 +6,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -20,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import moonc.example.com.studentteachercollaboration_v2.Adapters.StudentAdapter;
+import moonc.example.com.studentteachercollaboration_v2.Adapters.UserAdapter;
 import moonc.example.com.studentteachercollaboration_v2.Contstants.Constants;
 import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 
@@ -30,7 +32,7 @@ public class AdminHome extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ListView listView;
-    FloatingActionButton addButton, routine;
+    FloatingActionButton addButton;
     ProgressBar progressBar;
 
     @Override
@@ -49,9 +51,9 @@ public class AdminHome extends AppCompatActivity {
                     employees_detail.add(value);
                 }
                 progressBar.setVisibility(View.INVISIBLE);
-                StudentAdapter studentAdapter = new StudentAdapter(getApplicationContext(),
+                UserAdapter userAdapter = new UserAdapter(getApplicationContext(),
                         employees_detail);
-                listView.setAdapter(studentAdapter);
+                listView.setAdapter(userAdapter);
             }
 
             @Override
@@ -74,15 +76,6 @@ public class AdminHome extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 updateOrDelete(position);
                 return false;
-            }
-        });
-
-        routine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AdminHome.this, ShowRoutine.class);
-                intent.putExtra(Constants.IS_ADMIN,true);
-                startActivity(intent);
             }
         });
     }
@@ -128,8 +121,30 @@ public class AdminHome extends AppCompatActivity {
         listView.setDivider(null);
         addButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        routine = (FloatingActionButton) findViewById(R.id.routine_);
         progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.view_routine_menu) {
+            Intent intent = new Intent(AdminHome.this, ShowRoutine.class);
+            intent.putExtra(Constants.IS_ADMIN, true);
+            startActivity(intent);
+        }
+        if (id == R.id.message_menu) {
+            startActivity(new Intent(this, ViewMessages.class));
+        }
+        if (id == R.id.logout) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

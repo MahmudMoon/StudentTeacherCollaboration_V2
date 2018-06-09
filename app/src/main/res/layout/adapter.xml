@@ -42,6 +42,14 @@
                 android:textColor="#ffff"
                 android:textSize="15dp" />
 
+            <TextView
+                android:id="@+id/role_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#ffff"
+                android:textSize="15dp" />
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

@@ -16,23 +16,26 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">
+
+        </activity>
+        <activity
+            android:name=".AdminHome"
+            android:label="@string/title_activity_admin">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
 
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AdminHome"
-            android:label="@string/title_activity_admin"/>
         <activity android:name=".UserAdd" />
         <activity android:name=".UserUpdate" />
         <activity android:name=".Working" />
         <activity android:name=".Teacher_activity" />
         <activity android:name=".RoutineAddOrUpdate" />
         <activity android:name=".ShowRoutine" />
-        <activity android:name=".SendMessage"/>
-        <activity android:name=".ViewMessages"/>
+        <activity android:name=".SendMessage" />
+        <activity android:name=".ViewMessages" />
+
         <service android:name=".Services.NotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

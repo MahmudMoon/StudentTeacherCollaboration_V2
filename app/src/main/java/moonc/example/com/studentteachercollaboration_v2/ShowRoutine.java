@@ -38,7 +38,7 @@ public class ShowRoutine extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ListView listView;
-    String session;
+    String session = "";
     RoutineAdapter routineAdapter;
     ArrayList<ArrayList<AcademicClass>> allRoutines = new ArrayList<>();
     int today = Constants.MIN_DAY_OF_WEEK;
