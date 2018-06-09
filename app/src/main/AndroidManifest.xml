@@ -29,7 +29,6 @@
         </activity>
         <activity android:name=".UserAdd" />
         <activity android:name=".UserUpdate" />
-        <activity android:name=".Working" />
         <activity android:name=".Teacher_activity" />
         <activity android:name=".RoutineAddOrUpdate" />
         <activity android:name=".ShowRoutine" />

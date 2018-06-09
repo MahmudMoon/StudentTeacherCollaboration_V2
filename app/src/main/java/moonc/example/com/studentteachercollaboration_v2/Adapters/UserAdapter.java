@@ -1,7 +1,6 @@
 package moonc.example.com.studentteachercollaboration_v2.Adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import moonc.example.com.studentteachercollaboration_v2.Contstants.Constants;
 import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 import moonc.example.com.studentteachercollaboration_v2.R;
 
@@ -46,7 +44,7 @@ public class UserAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        view = layoutInflater.inflate(R.layout.adapter, null);
+        view = layoutInflater.inflate(R.layout.show_user_list_view, null);
         name_ = (TextView) view.findViewById(R.id.tv_name);
         email_id = (TextView) view.findViewById(R.id.tv_email);
         phone_num_ = (TextView) view.findViewById(R.id.tv_phone);

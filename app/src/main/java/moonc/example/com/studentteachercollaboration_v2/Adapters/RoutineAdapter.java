@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import moonc.example.com.studentteachercollaboration_v2.Models.AcademicClass;
@@ -43,7 +42,7 @@ public class RoutineAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        view = inflater.inflate(R.layout.adapter_for_routine,null);
+        view = inflater.inflate(R.layout.show_routine_list_view,null);
         sub = (TextView)view.findViewById(R.id.subject);
         course = (TextView)view.findViewById(R.id.courseCode);
         starttime = (TextView)view.findViewById(R.id.startTime);
