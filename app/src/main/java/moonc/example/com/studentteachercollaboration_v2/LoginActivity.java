@@ -122,12 +122,12 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         String selectedItem = (String) spinner.getSelectedItem();
-        if (selectedItem.equals("Admin")) {
+        if (selectedItem.equals("AdminHome")) {
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Intent intent = new Intent(LoginActivity.this, Admin.class);
+                        Intent intent = new Intent(LoginActivity.this, AdminHome.class);
                         startActivity(intent);
                         Toast.makeText(getApplicationContext(), "Successfully logged in", Toast.LENGTH_SHORT).show();
                     } else {

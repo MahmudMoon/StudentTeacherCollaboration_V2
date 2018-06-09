@@ -22,7 +22,6 @@ import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 
 public class Update extends AppCompatActivity {
 
-
     DatabaseReference databaseReference;
     EditText name_,email_,phone_,id_,password_;
     Button update;
@@ -128,7 +127,7 @@ public class Update extends AppCompatActivity {
                 id_.setText("");
                 password_.setText("");
 
-                Intent intent1 = new Intent(Update.this,Admin.class);
+                Intent intent1 = new Intent(Update.this,AdminHome.class);
                 startActivity(intent1);
             }
         });

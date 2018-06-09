@@ -44,6 +44,9 @@ public class SendMessage extends AppCompatActivity {
                     message1.setMessageBody(message);
                     message1.setTime(new Date());
                     databaseReference.child(key).setValue(message1);
+                    Toast.makeText(SendMessage.this, "Message sent!",
+                            Toast.LENGTH_SHORT).show();
+                    messageEditText.setText("");
                 } else {
                     messageEditText.setError("This field can not be empty");
                 }

@@ -24,7 +24,7 @@ import moonc.example.com.studentteachercollaboration_v2.Adapters.StudentAdapter;
 import moonc.example.com.studentteachercollaboration_v2.Contstants.Constants;
 import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 
-public class Admin extends AppCompatActivity {
+public class AdminHome extends AppCompatActivity {
 
     ArrayList<Student> employees_detail = new ArrayList<>();
     FirebaseDatabase firebaseDatabase;
@@ -64,7 +64,7 @@ public class Admin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //  alertDialog.show();
-                Intent intent = new Intent(Admin.this, StudentAdd.class);
+                Intent intent = new Intent(AdminHome.this, StudentAdd.class);
                 startActivity(intent);
             }
         });
@@ -80,7 +80,7 @@ public class Admin extends AppCompatActivity {
         routine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Admin.this, ShowRoutine.class);
+                Intent intent = new Intent(AdminHome.this, ShowRoutine.class);
                 intent.putExtra(Constants.IS_ADMIN,true);
                 startActivity(intent);
             }
@@ -111,7 +111,7 @@ public class Admin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String Key = employees_detail.get(position).getKey();
-                Intent intent = new Intent(Admin.this, Update.class);
+                Intent intent = new Intent(AdminHome.this, Update.class);
                 intent.putExtra("Key", Key);
                 startActivity(intent);
             }
