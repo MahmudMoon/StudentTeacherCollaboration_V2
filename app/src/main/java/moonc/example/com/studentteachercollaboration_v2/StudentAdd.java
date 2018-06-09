@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import moonc.example.com.studentteachercollaboration_v2.Models.Student;
 
-public class Add extends AppCompatActivity {
+public class StudentAdd extends AppCompatActivity {
     EditText name_,email_,phone_,id_,password_;
     Spinner role,Session;
     Button button;

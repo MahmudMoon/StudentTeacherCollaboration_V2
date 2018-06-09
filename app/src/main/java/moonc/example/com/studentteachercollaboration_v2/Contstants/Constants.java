@@ -12,4 +12,5 @@ public class Constants {
             "Wednesday", "Thursday", "Friday"};
     public static final String IS_ADMIN = "isadmin";
     public static final String SESSION = "session";
+    public static final String MESSAGES = "messages";
 }

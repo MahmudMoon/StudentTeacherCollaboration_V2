@@ -64,7 +64,7 @@ public class Admin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //  alertDialog.show();
-                Intent intent = new Intent(Admin.this, Add.class);
+                Intent intent = new Intent(Admin.this, StudentAdd.class);
                 startActivity(intent);
             }
         });
