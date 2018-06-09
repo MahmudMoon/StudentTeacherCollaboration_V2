@@ -32,10 +32,15 @@
     </string-array>
 
     <string-array name="session">
+        <item>2010-11</item>
+        <item>2011-12</item>
+        <item>2012-13</item>
         <item>2013-14</item>
         <item>2014-15</item>
         <item>2015-16</item>
         <item>2016-17</item>
+        <item>2017-18</item>
+        <item>2018-19</item>
     </string-array>
 
     <string-array name="day">
