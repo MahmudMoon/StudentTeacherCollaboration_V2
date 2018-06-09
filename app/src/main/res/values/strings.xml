@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">StudentTeacherCollaboration_V2</string>
-    <string name="title_activity_login">StudentTeacherCollaboration_V2</string>
+    <string name="app_name">Student Teacher Collaboration</string>
+    <string name="title_activity_login">Student Teacher Collaboration</string>
+    <string name="admin_panel">Admin Panel</string>
+    <string name="add_user">Add User</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
