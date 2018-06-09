@@ -135,7 +135,7 @@ public class AdminHome extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.view_routine_menu) {
             Intent intent = new Intent(AdminHome.this, ShowRoutine.class);
-            intent.putExtra(Constants.IS_ADMIN, true);
+            intent.putExtra(Constants.ROLE, Constants.ADMIN);
             startActivity(intent);
         }
         if (id == R.id.message_menu) {

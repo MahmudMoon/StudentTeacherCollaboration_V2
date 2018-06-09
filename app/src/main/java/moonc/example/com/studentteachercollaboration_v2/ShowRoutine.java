@@ -6,6 +6,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -45,8 +47,8 @@ public class ShowRoutine extends AppCompatActivity {
     ImageButton previousDayButton;
     TextView todayTextView;
     Spinner sessionSpinner;
-    boolean isAdmin;
     FloatingActionButton addRoutineButton;
+    String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,16 +77,9 @@ public class ShowRoutine extends AppCompatActivity {
             }
         });
 
-        // Only admin has these privileges
-        if (isAdmin) {
-            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                    updateOrDelete(position);
-                    return false;
-                }
-            });
-
+        // Only admin and teacher has these privileges
+        if (role.equalsIgnoreCase(Constants.ADMIN)
+                || role.equalsIgnoreCase(Constants.TEACHER)) {
             LinearLayout linearLayout = (LinearLayout) findViewById(
                     R.id.routine_spinner_linear_layout);
             linearLayout.setVisibility(View.VISIBLE);
@@ -100,15 +95,27 @@ public class ShowRoutine extends AppCompatActivity {
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
             });
-            addRoutineButton.setVisibility(View.VISIBLE);
 
-            addRoutineButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ShowRoutine.this, RoutineAddOrUpdate.class);
-                    startActivity(intent);
-                }
-            });
+            // Only admin can add or update routine
+            if (role.equalsIgnoreCase(Constants.ADMIN)) {
+                listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        updateOrDelete(position);
+                        return false;
+                    }
+                });
+
+                addRoutineButton.setVisibility(View.VISIBLE);
+
+                addRoutineButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ShowRoutine.this, RoutineAddOrUpdate.class);
+                        startActivity(intent);
+                    }
+                });
+            }
         }
     }
 
@@ -175,10 +182,11 @@ public class ShowRoutine extends AppCompatActivity {
             allRoutines.add(new ArrayList<AcademicClass>());
         }
         Intent intent = getIntent();
-        isAdmin = intent.getBooleanExtra(Constants.IS_ADMIN, false);
+        role = intent.getStringExtra(Constants.ROLE);
         session = intent.getStringExtra(Constants.SESSION);
 
-        if (isAdmin)
+        if (role.equalsIgnoreCase(Constants.ADMIN) ||
+                role.equalsIgnoreCase(Constants.TEACHER))
             session = (String) sessionSpinner.getSelectedItem();
     }
 
@@ -264,5 +272,22 @@ public class ShowRoutine extends AppCompatActivity {
                 return calendarLHS.compareTo(calendarRHD);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Only teacher has this privilege
+        if (role.equalsIgnoreCase(Constants.TEACHER))
+            getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.write_message_menu_button) {
+            startActivity(new Intent(ShowRoutine.this, SendMessage.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

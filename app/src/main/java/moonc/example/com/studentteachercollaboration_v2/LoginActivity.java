@@ -140,13 +140,14 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this,
                                     ShowRoutine.class);
                             intent.putExtra("session", Session);
-                            intent.putExtra(Constants.IS_ADMIN, false);
+                            intent.putExtra(Constants.ROLE, Constants.STUDENT);
                             startActivity(intent);
                             break;
 
                         } else {
                             Intent intent = new Intent(LoginActivity.this,
-                                    Teacher_activity.class);
+                                    ShowRoutine.class);
+                            intent.putExtra(Constants.ROLE, Constants.TEACHER);
                             startActivity(intent);
                             break;
                         }

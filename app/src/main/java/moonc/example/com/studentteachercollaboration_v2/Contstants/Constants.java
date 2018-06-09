@@ -10,7 +10,11 @@ public class Constants {
     public static final int MAX_DAY_OF_WEEK = 7;
     public static String[] NAME_OF_DAY_IN_WEEK = {"Saturday", "Sunday", "Monday", "Tuesday",
             "Wednesday", "Thursday", "Friday"};
-    public static final String IS_ADMIN = "isadmin";
     public static final String SESSION = "session";
     public static final String MESSAGES = "messages";
+    public static final String TEACHER = "teacher";
+    public static final String STUDENT = "student";
+    public static final String ADMIN = "admin";
+    public static final String ROLE = "role";
+
 }
