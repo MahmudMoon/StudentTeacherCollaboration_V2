@@ -44,7 +44,7 @@ public class RoutineAddOrUpdate extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_routine__add);
+        setContentView(R.layout.activity_routine_add);
         Intent intent = getIntent();
         session_ = intent.getStringExtra("session");
         day = intent.getStringExtra("day");
