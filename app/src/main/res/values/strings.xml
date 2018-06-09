@@ -21,10 +21,9 @@
         <item>Student</item>
     </string-array>
 
-
     <string-array name="role">
-        <item>Teacher</item>
         <item>Student</item>
+        <item>Teacher</item>
     </string-array>
 
     <string-array name="session">
@@ -34,7 +33,6 @@
         <item>2016-17</item>
     </string-array>
 
-
     <string-array name="day">
         <item>Sunday</item>
         <item>Monday</item>
@@ -42,7 +40,6 @@
         <item>Wednesday</item>
         <item>Thursday</item>
     </string-array>
-
 
     <string-array name="period">
         <item>1st</item>
