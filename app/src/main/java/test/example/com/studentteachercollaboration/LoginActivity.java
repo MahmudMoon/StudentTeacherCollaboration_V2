@@ -131,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                     String Email = detail.getEmail_id_number();
                     String Password = detail.getPassword();
                     String Role = detail.getRole();
+                    String name = detail.getName();
 
                     if (Email.equals(email) && Password.equals(password) && Role.equals(role)) {
                         isAuthenticated = true;
@@ -147,6 +148,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this,
                                     ShowRoutine.class);
                             intent.putExtra(Constants.ROLE, Constants.TEACHER);
+                            intent.putExtra(Constants.NAME, name);
                             startActivity(intent);
                             break;
                         }

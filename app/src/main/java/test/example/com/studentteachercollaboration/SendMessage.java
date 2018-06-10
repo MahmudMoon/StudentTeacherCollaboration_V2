@@ -22,6 +22,7 @@ public class SendMessage extends AppCompatActivity {
     DatabaseReference databaseReference;
     EditText messageEditText;
     Button sendButton;
+    String senderName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class SendMessage extends AppCompatActivity {
                     String key = databaseReference.push().getKey();
                     String message = messageEditText.getText().toString();
                     CustomMessage message1 = new CustomMessage();
-                    message1.setFrom("Shoukhin");
+                    message1.setFrom(senderName);
                     message1.setMessageBody(message);
                     message1.setTime(new Date());
                     message1.setKey(key);
@@ -61,6 +62,7 @@ public class SendMessage extends AppCompatActivity {
     private void initializeVariables() {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(Constants.MESSAGES);
+        senderName = getIntent().getStringExtra(Constants.NAME);
     }
 
     private void initializeViews() {

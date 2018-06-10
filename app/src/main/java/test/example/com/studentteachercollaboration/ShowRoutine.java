@@ -47,6 +47,7 @@ public class ShowRoutine extends AppCompatActivity {
     Spinner sessionSpinner;
     FloatingActionButton addRoutineButton;
     String role;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +119,9 @@ public class ShowRoutine extends AppCompatActivity {
             addRoutineButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(ShowRoutine.this, SendMessage.class));
+                    Intent intent = new Intent(ShowRoutine.this, SendMessage.class);
+                    intent.putExtra(Constants.NAME, name);
+                    startActivity(intent);
                 }
             });
         }
@@ -195,6 +198,7 @@ public class ShowRoutine extends AppCompatActivity {
         Intent intent = getIntent();
         role = intent.getStringExtra(Constants.ROLE);
         session = intent.getStringExtra(Constants.SESSION);
+        name = intent.getStringExtra(Constants.NAME);
 
         if (role.equalsIgnoreCase(Constants.ADMIN) ||
                 role.equalsIgnoreCase(Constants.TEACHER))
